@@ -1,0 +1,86 @@
+//pro typescript entender os core modules do node
+npm i --save-dev @types/node
+
+//pacote para facilitar a leitura de argumentos passados pela linha de comando
+npm install minimist
+npm install --save-dev @types/minimist
+
+deve ter um -- antes dos argumentos, e cada nome de argumento deve ter outro --
+ex: npm run dev -- --name=John --age=30 --verbose
+
+//chalk (versão 5 não funciona com typescript por algum motivo)
+npm install chalk@4.1.2
+npm install --save-dev @types/chalk
+
+//versão 9 não funciona com typescript por algum motivo --mesmo problema do chalk
+npm install inquirer@8.2.6 
+npm install --save-dev @types/inquirer
+
+//express
+npm install express
+npm install --save-dev @types/express
+
+//nodemon
+npm install nodemon
+npm install --save-dev @types/nodemon
+
+//express-handlebars
+npm install express-handlebars
+npm install --save-dev @types/express-handlebars
+
+/*Bancos de dados - tem o mysql, mas o mysql2 é melhor, e tem melhor suporte para o sequelize*/
+//mysql2
+npm install mysql2
+//npm install --save-dev @types/mysql2 --não tem o types
+
+//sequelize (etityframework do Node)
+//https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
+//https://sequelize.org/docs/v6/core-concepts/model-basics/
+npm install sequelize
+npm install --save-dev @types/sequelize
+
+//bcryptjs (criptografar senhas)
+npm install bcryptjs
+npm install --save-dev @types/bcryptjs
+
+//connect-flash
+//cookie-parser
+//cookie-session
+//express-flash
+//express-session
+//session-file-store
+npm install .
+npm install --save-dev @types/.
+
+//mongo db
+/*criar comando para instalar mongodb no node*/
+npm install mongodb 
+npm install --save-dev @types/mongodb
+
+//mongoose
+/*criar comando para instalar mongodb no node*/
+npm install mongoose 
+npm install --save-dev @types/mongoose
+
+//zod para validação de dados
+npm install zod
+
+//CORS
+npm install cors
+npm install --save-dev @types/cors
+
+//jwt
+npm install jsonwebtoken
+npm install --save-dev @types/jsonwebtoken
+
+//multer --trabalho com importação de arquivos
+npm install multer
+npm install --save-dev @types/multer
+
+//dotenv
+npm install dotenv
+npm install --save-dev @types/dotenv
+
+//bcrypt (criptografar senhas)
+npm install bcrypt
+npm install --save-dev @types/bcrypt

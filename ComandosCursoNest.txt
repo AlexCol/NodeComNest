@@ -1,0 +1,14 @@
+//atualizar o node só baixar a nova versão pelo site
+https://nodejs.org/en/download
+
+//atualizar o npm
+npm -v
+npm install -g npm
+
+//instalar o Nest Cli de forma global
+npm i -g @nestjs/cli
+
+//iniciar projeto nestjs
+nest new <nome_pasta>
+ou
+nest new . //para criar na pasta que está
