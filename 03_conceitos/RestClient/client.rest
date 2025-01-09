@@ -1,0 +1,9 @@
+# @name AppControllerGetHello
+@baseUrl = http://localhost:3000
+@exemplo = exemplo
+
+### hello
+GET {{baseUrl}}
+
+### exemplo (cada comando precisa estar separado por 3#)
+GET {{baseUrl}}/{{exemplo}}

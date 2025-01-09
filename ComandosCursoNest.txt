@@ -12,3 +12,6 @@ npm i -g @nestjs/cli
 nest new <nome_pasta>
 ou
 nest new . //para criar na pasta que está
+
+** --skip-git
+se não adicionar isso, ele inicia um repositório git ao criar um nest new
