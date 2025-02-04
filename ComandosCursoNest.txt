@@ -13,5 +13,11 @@ nest new <nome_pasta>
 ou
 nest new . //para criar na pasta que está
 
+nest new . --skip-git
+
 ** --skip-git
 se não adicionar isso, ele inicia um repositório git ao criar um nest new
+
+posso criar o modulo 'na mão', ou usar o comando abaixo (ele vai criar a pasta também, tudo dentro do src)
+nest generate module <nome-modulo>
+ex: nest generate module conceitos-automatico

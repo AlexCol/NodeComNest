@@ -15,4 +15,8 @@ export class AppController {
     return 'Exemplo';
   }
 
+  @Get('/novo-exemplo')
+  getNovoExemplo(): string {
+    return this.appService.getNovoExemplo();
+  }
 }

@@ -7,3 +7,6 @@ GET {{baseUrl}}
 
 ### exemplo (cada comando precisa estar separado por 3#)
 GET {{baseUrl}}/{{exemplo}}
+
+### exemplo usando serviços
+GET {{baseUrl}}/novo-exemplo
