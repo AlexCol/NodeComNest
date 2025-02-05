@@ -1,4 +1,9 @@
 import { Module } from "@nestjs/common";
+import { ConceitosManualController } from "./conceitos-manual.controller";
+import { ConceitosManualService } from "./conceitos-manual.service";
 
-@Module({})
+@Module({
+  providers: [ConceitosManualService],
+  controllers: [ConceitosManualController]
+})
 export class ConceitosManualModule { }

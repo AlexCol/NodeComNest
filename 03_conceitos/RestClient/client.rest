@@ -10,3 +10,15 @@ GET {{baseUrl}}/{{exemplo}}
 
 ### exemplo usando serviços
 GET {{baseUrl}}/novo-exemplo
+
+### manual controller
+GET {{baseUrl}}/conceitos-manual
+
+### manual controller consumindo service
+GET {{baseUrl}}/conceitos-manual/soluciona-home
+
+### automatico  controller
+GET {{baseUrl}}/conceitos-automatico
+
+### automatico controller consumindo service
+GET {{baseUrl}}/conceitos-automatico/soluciona-home

@@ -19,5 +19,10 @@ nest new . --skip-git
 se não adicionar isso, ele inicia um repositório git ao criar um nest new
 
 posso criar o modulo 'na mão', ou usar o comando abaixo (ele vai criar a pasta também, tudo dentro do src)
-nest generate module <nome-modulo>
+nest generate module <nome-modulo> --no-spec
 ex: nest generate module conceitos-automatico
+
+o mesmo vale pra controllers
+ex: nest generate controller conceitos-automatico
+
+--no-spec é pra não criar um arquivo de testes
