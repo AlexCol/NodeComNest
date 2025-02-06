@@ -26,3 +26,17 @@ o mesmo vale pra controllers
 ex: nest generate controller conceitos-automatico
 
 --no-spec é pra não criar um arquivo de testes
+
+comandos podem ser resumidos (generate = g, controller = co, module = mo)
+
+/*para usar dotEnv*/
+--biblioteca do nest
+1.0: npm i --save @nestjs/config
+1.1: import { ConfigModule } from '@nestjs/config';
+1.2: ConfigModule.forRoot();
+1.3: usar.... ex: process.env.PORT
+
+--direto com dotenv
+2.0: npm install dotenv
+2.1: import 'dotenv/config';
+2.2: usar.... ex: process.env.PORT

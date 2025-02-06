@@ -1,6 +1,32 @@
 @baseUrl = http://localhost:3000
 @exemplo = exemplo
 
-### hello
-GET {{baseUrl}}
+#Recados
+@recadosController = recados
+### findAll
+GET {{baseUrl}}/{{recadosController}}
 
+### findById
+GET {{baseUrl}}/{{recadosController}}/fixa/alexandre/10
+
+### findTwo (teste parametros)
+GET {{baseUrl}}/{{recadosController}}/testeParam/alexandre/10
+
+### create reacado
+POST {{baseUrl}}/{{recadosController}}
+Content-Type: application/json
+
+{
+    "recado": "novo recado"
+}
+
+### update recado
+PATCH {{baseUrl}}/{{recadosController}}/10
+Content-Type: application/json
+
+{
+    "recado": "recado atualizado"
+}
+
+### delete recado
+DELETE {{baseUrl}}/{{recadosController}}/10
