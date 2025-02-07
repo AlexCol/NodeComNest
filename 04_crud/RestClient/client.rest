@@ -30,3 +30,17 @@ Content-Type: application/json
 
 ### delete recado
 DELETE {{baseUrl}}/{{recadosController}}/10
+
+### pagina recado
+GET {{baseUrl}}/{{recadosController}}/pagina
+?pagina=1
+&limite=2
+
+### pagina recado2 - com desestruturação
+GET {{baseUrl}}/{{recadosController}}/pagina2
+?pagina=1
+&limite=2
+&user=alexandre
+
+### from service
+GET {{baseUrl}}/{{recadosController}}/from-service
