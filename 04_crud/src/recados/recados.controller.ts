@@ -4,7 +4,7 @@ import {
   Delete,
   Get,
   HttpCode,
-  HttpStatus,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -13,10 +13,52 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { RecadosService } from './recados.service';
+import { Recado } from './entities/recado.entity';
+import { CreateRecadoDto } from './dto/create-recado.dto';
+import { UpdateRecadoDto } from './dto/update-recado.dto';
 
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) { }
+  @Get()
+  findAll(
+    @Query() query: any
+  ) {
+    const { page, limit } = query;
+    return this.recadosService.findAll(page, limit);
+  }
+
+  @Get(':id')
+  findOne(
+    @Param('id') id: string
+  ) {
+    return this.recadosService.findById(Number(id));
+  }
+
+  @Post()
+  create(@Body() body: CreateRecadoDto) {
+    return this.recadosService.create(body);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() body: UpdateRecadoDto
+  ) {
+    var retorno = this.recadosService.update(Number(id), body);
+    return retorno;
+  }
+
+  @Delete(':id')
+  remove(
+    @Param('id') id: string
+  ) {
+    const recado = this.recadosService.remove(Number(id));
+    return { message: `Recado ${id} removido com sucesso`, ...recado };
+  }
+}
+
+/* exemplos anteriores
 
   @Get()
   findAll() {
@@ -79,8 +121,8 @@ export class RecadosController {
     response.status(200).json({ message: `Recado ${id} removido com sucesso` });
     //return `Remove o recado ${id}`;
   }
-}
 
-type IRecado = {
-  recado: string;
-};
+  type IRecado = { //fora da classe
+    recado: string;
+  };
+*/

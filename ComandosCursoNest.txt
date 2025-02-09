@@ -40,3 +40,13 @@ comandos podem ser resumidos (generate = g, controller = co, module = mo)
 2.0: npm install dotenv
 2.1: import 'dotenv/config';
 2.2: usar.... ex: process.env.PORT
+
+/*pacotes*/
+//pra usar ValidationPipe()
+npm i class-validator
+
+//para transformação de classe
+npm i class-transformer
+
+//para mapear tipos
+npm i @nestjs/mapped-types

@@ -6,30 +6,49 @@
 ### findAll
 GET {{baseUrl}}/{{recadosController}}
 
-### findById
-GET {{baseUrl}}/{{recadosController}}/fixa/alexandre/10
+### findAll paginated
+GET {{baseUrl}}/{{recadosController}}
+?page=1
+&limit=1
 
-### findTwo (teste parametros)
-GET {{baseUrl}}/{{recadosController}}/testeParam/alexandre/10
+### findById
+GET {{baseUrl}}/{{recadosController}}/3
 
 ### create reacado
 POST {{baseUrl}}/{{recadosController}}
 Content-Type: application/json
 
 {
-    "recado": "novo recado"
+  "texto": "Recado 3",
+  "de": "Maria",
+  "para": "Pedro",
+  "lido": false
 }
 
 ### update recado
-PATCH {{baseUrl}}/{{recadosController}}/10
+PATCH {{baseUrl}}/{{recadosController}}/1
 Content-Type: application/json
 
 {
-    "recado": "recado atualizado"
+    "id": 5,
+    "texto": "recado atualizado a - oafensivo",
+    "lido": true
 }
 
 ### delete recado
-DELETE {{baseUrl}}/{{recadosController}}/10
+DELETE {{baseUrl}}/{{recadosController}}/2
+
+#########
+#########
+#########
+#########
+#########
+#########
+#########
+#########
+#########
+#########
+#########
 
 ### pagina recado
 GET {{baseUrl}}/{{recadosController}}/pagina
