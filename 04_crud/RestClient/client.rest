@@ -12,7 +12,7 @@ GET {{baseUrl}}/{{recadosController}}
 &limit=1
 
 ### findById
-GET {{baseUrl}}/{{recadosController}}/3
+GET {{baseUrl}}/{{recadosController}}/1
 
 ### create reacado
 POST {{baseUrl}}/{{recadosController}}
@@ -22,8 +22,9 @@ Content-Type: application/json
   "texto": "Recado 3",
   "de": "Maria",
   "para": "Pedro",
-  "lido": false
+  "coisa": "estranha"
 }
+# 'coisa' não será salvo pois não está no index.ts no ValidationPipe a opção whitelist
 
 ### update recado
 PATCH {{baseUrl}}/{{recadosController}}/1
@@ -36,7 +37,10 @@ Content-Type: application/json
 }
 
 ### delete recado
-DELETE {{baseUrl}}/{{recadosController}}/2
+DELETE {{baseUrl}}/{{recadosController}}/1
+
+### delete com validação customização
+DELETE {{baseUrl}}/{{recadosController}}/custom/a
 
 #########
 #########

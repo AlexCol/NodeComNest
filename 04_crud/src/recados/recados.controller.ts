@@ -3,17 +3,15 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  NotFoundException,
+  HttpException,
+  HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
-  Query,
-  Res,
+  Query
 } from '@nestjs/common';
-import { Response } from 'express';
 import { RecadosService } from './recados.service';
-import { Recado } from './entities/recado.entity';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 
@@ -30,9 +28,10 @@ export class RecadosController {
 
   @Get(':id')
   findOne(
-    @Param('id') id: string
+    @Param('id') id: number //!transform na pipe para number (index do projeto)
   ) {
-    return this.recadosService.findById(Number(id));
+    //lembrete: validation pipe transform está desativado, logo aqui vai dar problema
+    return this.recadosService.findById(id);
   }
 
   @Post()
@@ -42,18 +41,37 @@ export class RecadosController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number, //!transform na pipe para number (index do projeto)
     @Body() body: UpdateRecadoDto
   ) {
-    var retorno = this.recadosService.update(Number(id), body);
+    console.log( //sem o transform, o body é um objeto genérico, mesmo tipado como UpdateRecadoDto
+      body.constructor.name,
+      body instanceof UpdateRecadoDto,
+    );
+    //lembrete: validation pipe transform está desativado, logo aqui vai dar problema
+    var retorno = this.recadosService.update(id, body);
     return retorno;
   }
 
   @Delete(':id')
   remove(
-    @Param('id') id: string
+    @Param('id', ParseIntPipe) id: number //!ParsePipe direto sem usar o transform do index (forma com mensagem customizada comentada abaixo)
   ) {
-    const recado = this.recadosService.remove(Number(id));
+    console.log(id, typeof id);
+    const recado = this.recadosService.remove(id);
+    return { message: `Recado ${id} removido com sucesso`, ...recado };
+  }
+
+  @Delete('custom/:id')
+  removeCustom(
+    @Param('id', new ParseIntPipe({
+      exceptionFactory: (error) => {
+        return new HttpException(`Id inválido: ${error}`, HttpStatus.BAD_REQUEST);
+      }
+    })) id: number //!ParsePipe direto sem usar o transform do index
+  ) {
+    console.log(id, typeof id);
+    const recado = this.recadosService.remove(id);
     return { message: `Recado ${id} removido com sucesso`, ...recado };
   }
 }

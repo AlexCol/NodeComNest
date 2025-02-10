@@ -57,9 +57,10 @@ export class RecadosService {
   update(id: number, recado: UpdateRecadoDto) {
     const index = this.findIndexById(id);
 
-    const { id: _, ...recadoDto } = recado as any;
+    //! com a validation pipeline, isso não é mais necessário
+    //const { id: _, ...recadoDto } = recado as any;
 
-    this.recados[index] = { ...this.recados[index], ...recadoDto };
+    this.recados[index] = { ...this.recados[index], ...recado };
     return this.recados[index];
   }
 
