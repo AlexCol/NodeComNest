@@ -1,0 +1,1 @@
+docker run -d --name postgreAulaNest -e POSTGRES_USER=root -e POSTGRES_PASSWORD=nest@852ad -e POSTGRES_DB=nest -p 5432:5432 --restart always postgres
