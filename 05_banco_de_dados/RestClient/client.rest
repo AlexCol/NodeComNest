@@ -1,1 +1,22 @@
 @baseUrl = http://localhost:3000
+
+### Get Recados / All
+GET {{baseUrl}}/recados
+?page=1
+?limit=10
+
+### Get Recados / One byId
+GET {{baseUrl}}/recados/3
+
+### Post Recados
+POST {{baseUrl}}/recados
+Content-Type: application/json
+
+{
+  "texto": "Recado 3",
+  "de": "Maria",
+  "para": "Pedro"
+}
+
+### Delete Recados / One byId
+DELETE {{baseUrl}}/recados/3

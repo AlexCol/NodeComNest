@@ -50,3 +50,10 @@ npm i class-transformer
 
 //para mapear tipos
 npm i @nestjs/mapped-types
+
+//instalar typeorm
+npm i @nestjs/typeorm
+npm i typeorm
+
+//instalar pacote para usar postgrees
+npm i pg
