@@ -35,13 +35,20 @@ export class RecadosService {
       lido: false,
       criadoEm: new Date(),
     }
-
     const recado = this.recadoRepository.create(novoRecado);
     return await this.recadoRepository.save(recado);
   }
 
-  async update(id: number, recado: UpdateRecadoDto) {
-    return null;
+  async update(id: number, recadoDto: UpdateRecadoDto) {
+    if (!(await this.findById(id))) throw Error('Not founded');
+    const partialDto = { lido: recadoDto?.lido, texto: recadoDto?.texto }
+    await this.recadoRepository.update(id, partialDto);
+    return await this.findById(id);
+
+    // const partialDto = { lido: recadoDto?.lido, texto: recadoDto?.texto }
+    // const recado = await this.recadoRepository.preload({ id: id, ...partialDto })
+    // if (!recado) this.throwNotFoundException();
+    // return await this.recadoRepository.save(recado);
   }
 
   async remove(id: number) {

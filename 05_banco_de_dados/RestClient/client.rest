@@ -18,5 +18,15 @@ Content-Type: application/json
   "para": "Pedro"
 }
 
+### Put Recados / One byId
+PUT {{baseUrl}}/recados/5
+Content-Type: application/json
+
+{
+  "texto": "Recado atualizado Post10",
+  "lido": true,
+  "de": "aaaaa"
+}
+
 ### Delete Recados / One byId
 DELETE {{baseUrl}}/recados/3

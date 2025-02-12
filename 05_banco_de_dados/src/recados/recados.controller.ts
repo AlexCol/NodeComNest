@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Put,
   Query
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
@@ -36,6 +37,14 @@ export class RecadosController {
   @Post()
   async create(@Body() body: CreateRecadoDto) {
     return await this.recadosService.create(body);
+  }
+
+  @Put(':id')
+  async updatePut(
+    @Param('id') id: number,
+    @Body() body: UpdateRecadoDto
+  ) {
+    return await this.recadosService.update(id, body);
   }
 
   @Patch(':id')
