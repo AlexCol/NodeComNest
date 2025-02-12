@@ -29,6 +29,9 @@ ex: nest generate controller conceitos-automatico
 
 comandos podem ser resumidos (generate = g, controller = co, module = mo)
 
+crud completo: resource
+nest g resource pessoas
+
 /*para usar dotEnv*/
 --biblioteca do nest
 1.0: npm i --save @nestjs/config
