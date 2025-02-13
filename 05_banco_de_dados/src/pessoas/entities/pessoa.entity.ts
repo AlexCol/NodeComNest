@@ -1,17 +1,17 @@
 import { IsEmail } from "class-validator";
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Pessoa {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 
   @Column({ length: 255 })
-  password: string;
+  passwordHash: string;
 
   @Column({ length: 100 })
   nome: string;

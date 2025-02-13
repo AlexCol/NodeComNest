@@ -60,3 +60,13 @@ npm i typeorm
 
 //instalar pacote para usar postgrees
 npm i pg
+
+/*pra usar o Fastify no lugar do Express*/
+npm i @nestjs/platform-fastify fastify
+npm uninstall @nestjs/platform-express
+npm uninstall @types/express
+
+ajustar na main de:
+const app = await NestFactory.create(AppModule);
+para
+const app = await NestFactory.create(AppModule, new FastifyAdapter());

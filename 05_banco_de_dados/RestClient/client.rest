@@ -30,3 +30,34 @@ Content-Type: application/json
 
 ### Delete Recados / One byId
 DELETE {{baseUrl}}/recados/3
+
+#########################
+### Pessoas
+### Get Pessoas / All
+GET {{baseUrl}}/pessoas
+?page=1
+?limit=10
+
+### Get Pessoas / One byId
+GET {{baseUrl}}/pessoas/16
+
+### Post Pessoas
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com",
+  "nome": "Maria",
+  "password": "Ab1@234"
+}
+
+### Put Pessoas / One byId
+PUT {{baseUrl}}/pessoas/14
+Content-Type: application/json
+
+{
+  "email": ""
+}
+
+### Delete Pessoas / One byId
+DELETE {{baseUrl}}/pessoas/17
