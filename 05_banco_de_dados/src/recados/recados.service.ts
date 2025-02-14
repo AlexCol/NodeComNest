@@ -4,11 +4,14 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PessoasService } from 'src/pessoas/pessoas.service';
 
 @Injectable()
 export class RecadosService {
   constructor(
-    @InjectRepository(Recado) private readonly recadoRepository: Repository<Recado>
+    @InjectRepository(Recado)
+    private readonly recadoRepository: Repository<Recado>,
+    private readonly pessoasService: PessoasService
   ) { }
 
   async findAll(page: number, limit: number = 0) {
@@ -16,9 +19,9 @@ export class RecadosService {
     const skip = (page - 1) * limit;
 
     if (limit === 0)
-      return await this.recadoRepository.find();
+      return await this.recadoRepository.find({ relations: ['de', 'para'] });
 
-    return await this.recadoRepository.find({ take, skip });
+    return await this.recadoRepository.find({ take, skip, relations: ['de', 'para'] });
   }
 
   async findById(id: number) {
@@ -30,8 +33,13 @@ export class RecadosService {
   }
 
   async create(recadoDto: CreateRecadoDto) {
+    const de = await this.pessoasService.findOne(recadoDto.de);
+    const para = await this.pessoasService.findOne(recadoDto.para);
+
     const novoRecado = {
-      ...recadoDto,
+      texto: recadoDto.texto,
+      de: de,
+      para: para,
       lido: false,
       criadoEm: new Date(),
     }

@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Pessoa } from "src/pessoas/entities/pessoa.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity() //se não passar nada, o nome da tabela será o nome da classe
 export class Recado {
@@ -8,13 +9,17 @@ export class Recado {
   @Column({ type: 'varchar', length: 255 })
   texto: string;
 
-  @Column({ type: 'varchar', length: 50 })
-  de: string;
+  //muitos recados podem ser enviados por uma pessoa
+  @ManyToOne(() => Pessoa)
+  @JoinColumn({ name: 'de' })
+  de: Pessoa;
 
-  @Column({ type: 'varchar', length: 50 })
-  para: string;
+  //muitos recados podem ser enviados para uma pessoa
+  @ManyToOne(() => Pessoa)
+  @JoinColumn({ name: 'para' })
+  para: Pessoa;
 
-  @Column({default: false})
+  @Column({ default: false })
   lido: boolean;
 
   @Column()

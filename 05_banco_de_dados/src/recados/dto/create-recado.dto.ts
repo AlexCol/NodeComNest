@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength, Validate } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, MaxLength, MinLength, Validate } from "class-validator";
 import { NoProfanityConstraint } from "./myValidators";
 
 export class CreateRecadoDto {
@@ -12,17 +12,13 @@ export class CreateRecadoDto {
   @Validate(NoProfanityConstraint) //usando o decorator do class-validator
   readonly texto: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(50)
-  readonly de: string;
+  readonly de: number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(50)
-  readonly para: string;
+  readonly para: number;
 }
 
 /*

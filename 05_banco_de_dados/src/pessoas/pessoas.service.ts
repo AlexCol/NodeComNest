@@ -68,7 +68,10 @@ export class PessoasService {
   }
 
   async update(id: number, updatePessoaDto: UpdatePessoaDto) {
-    return `This action updates a #${id} pessoa`;
+    await this.findOne(id); //só pra validar se a pessoa existe
+    const partialDto = { nome: updatePessoaDto.nome, passwordHash: updatePessoaDto.password }
+    await this.pessoaRepository.update(id, partialDto);
+    return await this.findOne(id);
   }
 
   async remove(id: number) {

@@ -3,7 +3,7 @@
 ### Get Recados / All
 GET {{baseUrl}}/recados
 ?page=1
-?limit=10
+&limit=10
 
 ### Get Recados / One byId
 GET {{baseUrl}}/recados/3
@@ -14,18 +14,18 @@ Content-Type: application/json
 
 {
   "texto": "Recado 3",
-  "de": "Maria",
-  "para": "Pedro"
+  "de": 50,
+  "para": 51
 }
 
 ### Put Recados / One byId
-PUT {{baseUrl}}/recados/5
+PUT {{baseUrl}}/recados/1
 Content-Type: application/json
 
 {
   "texto": "Recado atualizado Post10",
   "lido": true,
-  "de": "aaaaa"
+  "de": 51
 }
 
 ### Delete Recados / One byId
@@ -36,7 +36,7 @@ DELETE {{baseUrl}}/recados/3
 ### Get Pessoas / All
 GET {{baseUrl}}/pessoas
 ?page=1
-?limit=10
+&limit=1
 
 ### Get Pessoas / One byId
 GET {{baseUrl}}/pessoas/16
@@ -46,17 +46,17 @@ POST {{baseUrl}}/pessoas
 Content-Type: application/json
 
 {
-  "email": "teste@teste.com",
+  "email": "teste@teste.com.br",
   "nome": "Maria",
   "password": "Ab1@234"
 }
 
-### Put Pessoas / One byId
-PUT {{baseUrl}}/pessoas/14
+### Patch Pessoas / One byId
+PATCH {{baseUrl}}/pessoas/50
 Content-Type: application/json
 
 {
-  "email": ""
+  "password": "234@Ab1"
 }
 
 ### Delete Pessoas / One byId
