@@ -10,12 +10,12 @@ export class Recado {
   texto: string;
 
   //muitos recados podem ser enviados por uma pessoa
-  @ManyToOne(() => Pessoa)
+  @ManyToOne(() => Pessoa, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'de' })
   de: Pessoa;
 
   //muitos recados podem ser enviados para uma pessoa
-  @ManyToOne(() => Pessoa)
+  @ManyToOne(() => Pessoa, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'para' })
   para: Pessoa;
 

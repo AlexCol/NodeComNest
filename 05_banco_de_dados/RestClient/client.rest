@@ -2,34 +2,35 @@
 
 ### Get Recados / All
 GET {{baseUrl}}/recados
-?page=1
-&limit=10
+?page=3
+&limit=2
 
 ### Get Recados / One byId
-GET {{baseUrl}}/recados/3
+GET {{baseUrl}}/recados/1
 
 ### Post Recados
 POST {{baseUrl}}/recados
 Content-Type: application/json
 
 {
-  "texto": "Recado 3",
-  "de": 50,
-  "para": 51
+  "texto": "Recado Teste",
+  "deId": 2,
+  "paraId": 3
 }
 
 ### Put Recados / One byId
-PUT {{baseUrl}}/recados/1
+PUT {{baseUrl}}/recados/68
 Content-Type: application/json
 
 {
   "texto": "Recado atualizado Post10",
   "lido": true,
-  "de": 51
+  //"deId": 2,
+  //"paraId": 3
 }
 
 ### Delete Recados / One byId
-DELETE {{baseUrl}}/recados/3
+DELETE {{baseUrl}}/recados/2
 
 #########################
 ### Pessoas
@@ -60,4 +61,4 @@ Content-Type: application/json
 }
 
 ### Delete Pessoas / One byId
-DELETE {{baseUrl}}/pessoas/17
+DELETE {{baseUrl}}/pessoas/1

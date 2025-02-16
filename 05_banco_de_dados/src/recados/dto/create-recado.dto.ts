@@ -14,11 +14,11 @@ export class CreateRecadoDto {
 
   @IsNumber()
   @IsNotEmpty()
-  readonly de: number;
+  readonly deId: number;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly para: number;
+  readonly paraId: number;
 }
 
 /*
