@@ -3,6 +3,8 @@ import { AppModule } from './app/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { ParseIntIdPipe } from './common/customPipes/parse-int-id';
+import { AddHeaderInterceptor } from './common/interceptors/add-header.interceptor';
+import { TimingConnectionInterceptor } from './common/interceptors/timing-connection.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -13,6 +15,12 @@ async function bootstrap() {
   }),
     new ParseIntIdPipe() //exemplo de uso de customPipe global
   );
+
+  app.useGlobalInterceptors(
+    new AddHeaderInterceptor(),
+    new TimingConnectionInterceptor()
+  ); //interceptor global
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

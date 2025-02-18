@@ -51,7 +51,7 @@ GET {{baseUrl}}/pessoas
 &limit=1
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/-16
+GET {{baseUrl}}/pessoas/51
 
 ### Post Pessoas
 POST {{baseUrl}}/pessoas

@@ -28,7 +28,8 @@ import { ParseIntIdPipe } from 'src/common/customPipes/parse-int-id';
 //     },
 //   },
 // ))
-@UsePipes(ParseIntIdPipe) //exemplo de uso de customPipe em um controller (por focar em 'id', essa não teria problema em colocar no controller)
+//@UsePipes(ParseIntIdPipe) //exemplo de uso de customPipe em um controller (por focar em 'id', essa não teria problema em colocar no controller)
+//sobre pipes: //pode ser usado no controller, metodo ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) { }
   @Get()
@@ -41,7 +42,8 @@ export class RecadosController {
   @Get(':id')
   async findOne(
     //@Param('id', ParseIntPipe) id: number //exemplo passando ParseIntPipe sem options
-    @Param('id', ParseIntIdPipe) id: number //exemplo usando customPipe - por focar em 'id', essa não teria problema em colocar no controller
+    //@Param('id', ParseIntIdPipe) id: number //exemplo usando customPipe - por focar em 'id', essa não teria problema em colocar no controller
+    @Param('id') id: number //Pipes podem ser usados no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
   ) {
     return await this.recadosService.findById(id);
   }
