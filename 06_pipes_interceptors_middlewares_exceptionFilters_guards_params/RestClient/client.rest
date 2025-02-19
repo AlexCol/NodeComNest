@@ -49,6 +49,7 @@ DELETE {{baseUrl}}/recados/a
 GET {{baseUrl}}/pessoas
 ?page=1
 &limit=1
+Authorization: Bearer MyToken
 
 ### Get Pessoas / One byId
 GET {{baseUrl}}/pessoas/51

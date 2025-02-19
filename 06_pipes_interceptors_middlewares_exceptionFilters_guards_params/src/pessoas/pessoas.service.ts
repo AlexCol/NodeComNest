@@ -57,7 +57,7 @@ export class PessoasService {
   }
 
   async findOne(id: number) {
-    console.log('service - findOne chamado');
+    //console.log('service - findOne chamado');
     const pessoa = await this.pessoaRepository.findOne({
       select: ['id', 'email', 'nome'],
       where: { id }

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UsePipes } from '@nestjs/common';
 import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
-import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
-import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
+import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
+import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 
+@UseInterceptors(AuthTokenInterceptor)
 @Controller('pessoas')
 //@UseInterceptors(AddHeaderInterceptor) //pode ser usado no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
 export class PessoasController {
@@ -24,9 +25,10 @@ export class PessoasController {
   }
 
   @Get(':id')
+  @UseInterceptors(ChangeDataInterceptor)
   //@UseInterceptors(AddHeaderInterceptor) //pode ser usado no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
   async findOne(@Param('id') id: number) {
-    console.log('controller - findOne chamado');
+    //console.log('controller - findOne chamado');
     return await this.pessoasService.findOne(id);
   }
 

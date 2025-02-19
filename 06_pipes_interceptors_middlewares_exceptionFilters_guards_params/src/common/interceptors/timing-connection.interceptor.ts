@@ -6,7 +6,7 @@ export class TimingConnectionInterceptor implements NestInterceptor {
     console.log('TimingConnectionInterceptor chamado.');
 
     const startTime = Date.now();
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    //await new Promise(resolve => setTimeout(resolve, 3000));
 
     return next.handle().pipe(
       //tap só é executado se o next.handle() for executado com sucesso (exceções não tratadas fazo tap não ser chamado)

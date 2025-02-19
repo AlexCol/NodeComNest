@@ -5,6 +5,8 @@ import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { ParseIntIdPipe } from './common/customPipes/parse-int-id';
 import { AddHeaderInterceptor } from './common/interceptors/add-header.interceptor';
 import { TimingConnectionInterceptor } from './common/interceptors/timing-connection.interceptor';
+import { ErrorHandlerInterceptor } from './common/interceptors/error-handler.interceptor';
+import { SimpleCacheInterceptor } from './common/interceptors/simple-cache.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -18,7 +20,9 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(
     new AddHeaderInterceptor(),
-    new TimingConnectionInterceptor()
+    new TimingConnectionInterceptor(),
+    new ErrorHandlerInterceptor(),
+    new SimpleCacheInterceptor(),
   ); //interceptor global
 
   await app.listen(process.env.PORT ?? 3000);
