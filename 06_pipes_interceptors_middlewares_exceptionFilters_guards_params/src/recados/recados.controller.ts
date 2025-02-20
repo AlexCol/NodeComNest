@@ -12,6 +12,8 @@ import {
   Post,
   Put,
   Query,
+  Req,
+  Request,
   UseInterceptors,
   UsePipes
 } from '@nestjs/common';
@@ -21,6 +23,7 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/customPipes/parse-int-id';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
+import { FastifyRequest } from 'fastify';
 
 @Controller('recados')
 // @UsePipes(new ParseIntPipe( //exemplo de uso de pipe em um controller (pode ter options ou não), pode quebrar rotas que não tenham parametros numericos (como findAll)
@@ -46,7 +49,9 @@ export class RecadosController {
     //@Param('id', ParseIntPipe) id: number //exemplo passando ParseIntPipe sem options
     //@Param('id', ParseIntIdPipe) id: number //exemplo usando customPipe - por focar em 'id', essa não teria problema em colocar no controller
     @Param('id') id: number //Pipes podem ser usados no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
+    , @Request() req: FastifyRequest
   ) {
+    console.log('User:', req['user']); //funciona para o Express, para o fastify não, pois mesmo que adicione no middleare, a request é imutavel no fastify
     return await this.recadosService.findById(id);
   }
 

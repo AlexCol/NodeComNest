@@ -7,6 +7,7 @@ import { AddHeaderInterceptor } from './common/interceptors/add-header.intercept
 import { TimingConnectionInterceptor } from './common/interceptors/timing-connection.interceptor';
 import { ErrorHandlerInterceptor } from './common/interceptors/error-handler.interceptor';
 import { SimpleCacheInterceptor } from './common/interceptors/simple-cache.interceptor';
+import { SimpleMiddleware } from './common/middlewares/simple.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -19,12 +20,16 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(
-    new AddHeaderInterceptor(),
-    new TimingConnectionInterceptor(),
-    new ErrorHandlerInterceptor(),
-    new SimpleCacheInterceptor(),
+    new ErrorHandlerInterceptor(), //a ordem importa, então para erro, melhor ser o primeiro
+    //new AddHeaderInterceptor(),
+    //new TimingConnectionInterceptor(),
+    //new SimpleCacheInterceptor(),
   ); //interceptor global
 
+  /*adicionar globalmente o middleware SimpleMiddleware*/ //! acomentado pois será adicionado por modulo, está no AppModule
+  //app.use(new SimpleMiddleware().use);
+
   await app.listen(process.env.PORT ?? 3000);
+
 }
 bootstrap();

@@ -7,6 +7,7 @@ GET {{baseUrl}}/recados
 
 ### Get Recados / One byId
 GET {{baseUrl}}/recados/1
+Authorization: Bearer MyToken
 
 ### Post Recados
 POST {{baseUrl}}/recados
@@ -52,7 +53,8 @@ GET {{baseUrl}}/pessoas
 Authorization: Bearer MyToken
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/51
+GET {{baseUrl}}/pessoas/51a
+Authorization: Bearer MyToken
 
 ### Post Pessoas
 POST {{baseUrl}}/pessoas
