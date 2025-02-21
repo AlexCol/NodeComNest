@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UsePipes, HttpException, BadRequestException } from '@nestjs/common';
 import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
@@ -29,6 +29,10 @@ export class PessoasController {
   //@UseInterceptors(AddHeaderInterceptor) //pode ser usado no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
   async findOne(@Param('id') id: number) {
     //console.log('controller - findOne chamado');
+
+    throw new HttpException('Erro proposital', 500);
+    //throw new BadRequestException('Erro proposital');
+
     return await this.pessoasService.findOne(id);
   }
 

@@ -53,7 +53,7 @@ GET {{baseUrl}}/pessoas
 Authorization: Bearer MyToken
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/51a
+GET {{baseUrl}}/pessoas/1
 Authorization: Bearer MyToken
 
 ### Post Pessoas

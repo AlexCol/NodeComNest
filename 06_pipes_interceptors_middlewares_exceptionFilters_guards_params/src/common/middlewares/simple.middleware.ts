@@ -9,12 +9,18 @@ export class SimpleMiddleware implements NestMiddleware {
     const auth = req.headers['authorization'];
     if (!auth) throw new BadRequestException('Token não informado - SimpleMiddleware.');
 
-    req['user'] = {
+    req['user'] = { //!funciona para o Express, para o fastify não, pois mesmo que adicione no middleare, a request é imutavel no fastify - precisnado ser obtida do 'contexto'
       nome: 'Fulano',
       sobreNome: 'de Tal'
     }
     console.log('Usuário autenticado.');
 
-    return next();
+    next();
+
+    //! so funciona no express
+    // res.on('finish', () => {
+    //   console.log('Resposta enviada');
+    // });
+
   }
 }

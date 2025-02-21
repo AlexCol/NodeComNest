@@ -8,6 +8,8 @@ import { TimingConnectionInterceptor } from './common/interceptors/timing-connec
 import { ErrorHandlerInterceptor } from './common/interceptors/error-handler.interceptor';
 import { SimpleCacheInterceptor } from './common/interceptors/simple-cache.interceptor';
 import { SimpleMiddleware } from './common/middlewares/simple.middleware';
+import { MyExceptionFilter } from './common/exceptionFiltes/my-exception.filter';
+import { GlobalExceptionFilter } from './common/exceptionFiltes/global-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -28,6 +30,12 @@ async function bootstrap() {
 
   /*adicionar globalmente o middleware SimpleMiddleware*/ //! acomentado pois será adicionado por modulo, está no AppModule
   //app.use(new SimpleMiddleware().use);
+
+  //! comenatdo aqui, pois outra forma de adicionar, para poder usar a injeçao de dependencia, é colocar no 'modulo raiz'
+  // app.useGlobalFilters( //aqui a ordem importa, o ultimo registrado é o primeiro a ser chamado
+  //   new GlobalExceptionFilter(),
+  //   new MyExceptionFilter(),
+  // ); //filtro global
 
   await app.listen(process.env.PORT ?? 3000);
 

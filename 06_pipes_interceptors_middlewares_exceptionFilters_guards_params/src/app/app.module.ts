@@ -5,6 +5,9 @@ import { RecadosModule } from 'src/recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { SimpleMiddleware } from 'src/common/middlewares/simple.middleware';
+import { APP_FILTER } from '@nestjs/core';
+import { MyExceptionFilter } from 'src/common/exceptionFiltes/my-exception.filter';
+import { GlobalExceptionFilter } from 'src/common/exceptionFiltes/global-exception.filter';
 
 @Module({
   imports: [
@@ -23,7 +26,11 @@ import { SimpleMiddleware } from 'src/common/middlewares/simple.middleware';
     PessoasModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    { provide: APP_FILTER, useClass: GlobalExceptionFilter }, //ordem importa, o ultimo registrado é o primeiro a ser chamado
+    { provide: APP_FILTER, useClass: MyExceptionFilter },
+  ],
 })
 export class AppModule implements NestModule {
 

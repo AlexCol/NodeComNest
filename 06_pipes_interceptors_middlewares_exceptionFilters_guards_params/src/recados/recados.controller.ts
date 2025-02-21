@@ -51,7 +51,7 @@ export class RecadosController {
     @Param('id') id: number //Pipes podem ser usados no metodo (ou global, adicionei no index - cuidar pois se colocar global e aqui ele vai chamar 2x)
     , @Request() req: FastifyRequest
   ) {
-    console.log('User:', req['user']); //funciona para o Express, para o fastify não, pois mesmo que adicione no middleare, a request é imutavel no fastify
+    console.log('User:', req['user']); //!funciona para o Express, para o fastify não, pois mesmo que adicione no middleare, a request é imutavel no fastify
     return await this.recadosService.findById(id);
   }
 
