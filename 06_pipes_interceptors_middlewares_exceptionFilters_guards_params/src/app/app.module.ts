@@ -36,9 +36,11 @@ export class AppModule implements NestModule {
 
   configure(consumer: MiddlewareConsumer) {
     //consumer.apply(SimpleMiddleware).forRoutes('*');
-    consumer.apply(SimpleMiddleware).forRoutes({
+    /*
+    consumer.apply(SimpleMiddleware).forRoutes({ //cuidado, usar Middlewares com Fastify após o Next as responses viram do Express
       path: 'recados/:id', //'*' para todos
       method: RequestMethod.ALL //ou pode-se esecificar o método
     });
+    //*/
   }
 }

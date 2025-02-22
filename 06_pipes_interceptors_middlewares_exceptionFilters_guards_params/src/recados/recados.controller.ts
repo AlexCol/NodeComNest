@@ -64,6 +64,7 @@ export class RecadosController {
   async updatePut(
     @Param('id', new ParseIntPipe({ //exemplo passando ParseIntPipe com options -- ele é sobrescrito se tenho o pipe no controller
       exceptionFactory() {
+        //essa bosta não funciona com o fastify, ela gera uma response do Express no Filter
         throw new BadRequestException('Metodo - Erro ao converter o parâmetro id');
       },
     })) id: number,
