@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
-import { ParseIntIdPipe } from './common/customPipes/parse-int-id';
+import { ParseIntIdPipe } from './common/pipes/parse-int-id';
 import { AddHeaderInterceptor } from './common/interceptors/add-header.interceptor';
 import { TimingConnectionInterceptor } from './common/interceptors/timing-connection.interceptor';
 import { ErrorHandlerInterceptor } from './common/interceptors/error-handler.interceptor';
@@ -10,6 +10,7 @@ import { SimpleCacheInterceptor } from './common/interceptors/simple-cache.inter
 import { SimpleMiddleware } from './common/middlewares/simple.middleware';
 import { MyExceptionFilter } from './common/exceptionFiltes/my-exception.filter';
 import { GlobalExceptionFilter } from './common/exceptionFiltes/global-exception.filter';
+import { IsAdminGuard } from './common/guards/is-admin.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -38,6 +39,11 @@ async function bootstrap() {
   //   new GlobalExceptionFilter(),
   //   new MyExceptionFilter(),
   // ); //filtro global
+
+  //! comenatdo aqui, pois outra forma de adicionar, para poder usar a injeçao de dependencia, é colocar no 'modulo raiz'
+  // app.useGlobalGuards(
+  //   new IsAdminGuard()
+  // ); //guarda global
 
   await app.listen(process.env.PORT ?? 3000);
 

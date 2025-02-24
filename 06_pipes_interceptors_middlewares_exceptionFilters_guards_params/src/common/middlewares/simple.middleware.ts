@@ -7,9 +7,9 @@ export class SimpleMiddleware implements NestMiddleware {
     console.log("SimpleMiddleware chamado.");
 
     const auth = req.headers['authorization'];
-    if (!auth) throw new BadRequestException('Token não informado - SimpleMiddleware.');
+    if (!auth) throw new BadRequestException('Token não informado - SimpleMiddleware.'); //esse throw está convertendo a request para ServerResponse
 
-    req['user'] = { //!funciona para o Express, para o fastify não, pois mesmo que adicione no middleare, a request é imutavel no fastify - precisnado ser obtida do 'contexto'
+    req['user'] = { //!funciona para o Express, para o fastify não, pois mesmo que adicione no middleware, a request é imutavel no fastify - precisnado ser obtida do 'contexto'
       nome: 'Fulano',
       sobreNome: 'de Tal'
     }

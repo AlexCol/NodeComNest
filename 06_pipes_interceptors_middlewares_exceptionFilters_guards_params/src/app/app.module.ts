@@ -5,9 +5,10 @@ import { RecadosModule } from 'src/recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { SimpleMiddleware } from 'src/common/middlewares/simple.middleware';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { MyExceptionFilter } from 'src/common/exceptionFiltes/my-exception.filter';
 import { GlobalExceptionFilter } from 'src/common/exceptionFiltes/global-exception.filter';
+import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { GlobalExceptionFilter } from 'src/common/exceptionFiltes/global-excepti
     AppService,
     { provide: APP_FILTER, useClass: GlobalExceptionFilter }, //ordem importa, o ultimo registrado é o primeiro a ser chamado
     { provide: APP_FILTER, useClass: MyExceptionFilter },
+    { provide: APP_GUARD, useClass: IsAdminGuard }
   ],
 })
 export class AppModule implements NestModule {

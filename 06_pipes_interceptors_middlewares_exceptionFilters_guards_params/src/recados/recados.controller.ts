@@ -14,6 +14,7 @@ import {
   Query,
   Req,
   Request,
+  UseGuards,
   UseInterceptors,
   UsePipes
 } from '@nestjs/common';
@@ -21,9 +22,11 @@ import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { ParseIntIdPipe } from 'src/common/customPipes/parse-int-id';
+import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { FastifyRequest } from 'fastify';
+import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
+import { IsPublic } from 'src/common/guards/is-public';
 
 @Controller('recados')
 // @UsePipes(new ParseIntPipe( //exemplo de uso de pipe em um controller (pode ter options ou não), pode quebrar rotas que não tenham parametros numericos (como findAll)
@@ -38,6 +41,8 @@ import { FastifyRequest } from 'fastify';
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) { }
   @Get()
+  //@UseGuards(new IsAdminGuard('admin')) //exemplo de uso de guarda em um controller
+  @IsPublic()
   async findAll(
     @Query() paginationDto: PaginationDto
   ) {
