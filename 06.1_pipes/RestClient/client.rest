@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+
+### Get Recados / All
+GET {{baseUrl}}/pipes
+
+### Get Pipes / One
+GET {{baseUrl}}/pipes/1A
