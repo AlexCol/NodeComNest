@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3000/exemplos
+
+### Get Exemplos / All
+GET {{baseUrl}}
+
+### Get Exemplos / One (falha pelo pipe)
+GET {{baseUrl}}/1a
+
+### Get Exemplos / One (sucesso)
+GET {{baseUrl}}/1
+
+### Get Exemplos / One by Uuid (falha pelo pipe)
+GET {{baseUrl}}/uuid/550e8400-e29b-41d4-a716-44665544000
+
+### Get Exemplos / One by Uuid (sucesso)
+GET {{baseUrl}}/uuid/550e8400-e29b-41d4-a716-446655440000
+
+### Get Exemplos para Filter
+## Se tirar Authorization trava no AuthGuard
+## Se mudar o token para algo diferente de Admin, trava no RoleGuard
+## Pipe valida se o Uuid é válido
+## Erros são capturados pelo Filter
+GET {{baseUrl}}/fluxo/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer admin
