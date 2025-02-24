@@ -3,5 +3,14 @@
 ### Get Recados / All
 GET {{baseUrl}}/pipes
 
-### Get Pipes / One
-GET {{baseUrl}}/pipes/1A
+### Get Pipes / One (falha pelo pipe)
+GET {{baseUrl}}/pipes/id/1a
+
+### Get Pipes / One (sucesso)
+GET {{baseUrl}}/pipes/id/1
+
+### Get Pipes / One by Uuid (falha pelo pipe)
+GET {{baseUrl}}/pipes/uuid/550e8400-e29b-41d4-a716-44665544000
+
+### Get Pipes / One by Uuid (sucesso)
+GET {{baseUrl}}/pipes/uuid/550e8400-e29b-41d4-a716-446655440000

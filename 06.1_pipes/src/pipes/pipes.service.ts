@@ -12,4 +12,8 @@ export class PipesService {
     return `This action returns a #${id} pipe`;
   }
 
+  findOneByUuid(id: string) {
+    return `This action returns a #${id} pipe - uuid`;
+  }
+
 }
