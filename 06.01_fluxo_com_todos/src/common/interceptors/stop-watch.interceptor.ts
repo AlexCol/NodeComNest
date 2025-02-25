@@ -1,6 +1,7 @@
-import { CallHandler, ExecutionContext, NestInterceptor } from "@nestjs/common";
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { finalize, Observable, tap } from "rxjs";
 
+@Injectable()
 export class StopWatchInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
     console.log("⌚ StopWatchInterceptor chamado.");

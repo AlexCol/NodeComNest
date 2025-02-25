@@ -5,8 +5,8 @@ import { ExemplosModule } from 'src/exemplos/exemplos.module';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { GlobalErrorFilter } from 'src/common/filters/global-error.filter';
 import { HttpErrorFilter } from 'src/common/filters/http-error.filter';
-import { AuthGuard } from 'src/common/guards/auth-guard';
-import { RoleGuard } from 'src/common/guards/role-guard';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { RoleGuard } from 'src/common/guards/role.guard';
 import { StopWatchInterceptor } from 'src/common/interceptors/stop-watch.interceptor';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 
