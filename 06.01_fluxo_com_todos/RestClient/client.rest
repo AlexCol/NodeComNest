@@ -15,10 +15,19 @@ GET {{baseUrl}}/uuid/550e8400-e29b-41d4-a716-44665544000
 ### Get Exemplos / One by Uuid (sucesso)
 GET {{baseUrl}}/uuid/550e8400-e29b-41d4-a716-446655440000
 
-### Get Exemplos para Filter
+### Get Exemplos
+#### 1. Middleware
+## SimpleMiddleware é chamado primeiro e trava se não tiver uma 'query' com senha 123.
+## SecondMiddleware é chamado depois e muda o header da response.
+#### 2. Guards
 ## Se tirar Authorization trava no AuthGuard
-## Se mudar o token para algo diferente de Admin, trava no RoleGuard
+## Se mudar o token para algo diferente de admin, trava no RoleGuard
+#### 3. Interceptors
+## StopWatchInterceptor inicializa o cronômetro
+## AddHeaderInterceptor adiciona um header
+#### 4. Pipes
 ## Pipe valida se o Uuid é válido
+#### 5. Filters
 ## Erros são capturados pelo Filter
-GET {{baseUrl}}/fluxo/550e8400-e29b-41d4-a716-446655440000
+GET {{baseUrl}}/fluxo/550e8400-e29b-41d4-a716-446655440000?senha=123
 Authorization: Bearer admin

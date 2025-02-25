@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ExemplosModule } from 'src/exemplos/exemplos.module';
@@ -9,6 +9,8 @@ import { AuthGuard } from 'src/common/guards/auth.guard';
 import { RoleGuard } from 'src/common/guards/role.guard';
 import { StopWatchInterceptor } from 'src/common/interceptors/stop-watch.interceptor';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
+import { SimpleMiddleware } from 'src/common/middlewares/simple.middleware';
+import { SecondMiddleware } from 'src/common/middlewares/second.middleware';
 
 @Module({
   imports: [ExemplosModule],
@@ -26,4 +28,15 @@ import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interce
 
   ],
 })
-export class AppModule { }
+export class AppModule implements NestModule { //implementar NestModule para usar o método configure (e usar Middleware)
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SimpleMiddleware).forRoutes({ //?ordem importa, o primeiro registrado é o primeiro a ser chamado
+      path: 'exemplos/fluxo/:uuid', //'*' para todos
+      method: RequestMethod.ALL //ou pode-se esecificar o método
+    });
+
+    consumer.apply(SecondMiddleware).forRoutes('*');
+
+  }
+}
