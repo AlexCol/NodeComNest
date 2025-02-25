@@ -3,7 +3,7 @@ import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from
 @Injectable()
 export class IsUuidPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
-    console.log(`🪈 IsUuidPipe disparado.`);
+    console.log(`🪈  IsUuidPipe chamado.`);
 
     if (metadata.type !== 'param' || metadata.data !== 'uuid')
       return value;
@@ -15,7 +15,7 @@ export class IsUuidPipe implements PipeTransform {
   }
 
   private isUuid(value: string): boolean {
-    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    const uuidRegex: RegExp = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
     return uuidRegex.test(value);
   }
 

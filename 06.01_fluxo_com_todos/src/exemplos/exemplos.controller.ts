@@ -26,6 +26,7 @@ export class ExemplosController {
   fluxo(
     @Param('uuid') uuid: string
   ) {
+    console.log('🔄 Controller chamado.');
     var random = Math.floor(Math.random() * 10) + 1;
     if (random <= 1)
       throw new Error(`Erro de 10% ao processar uuid: ${uuid}`);
@@ -33,6 +34,8 @@ export class ExemplosController {
     if (random <= 3)
       throw new HttpException(`Erro de 20% ao processar uuid: ${uuid}`, 400);
 
-    return this.exemplosService.findOneUuid(uuid);
+    var retorno = this.exemplosService.findOneUuid(uuid);
+    console.log('✳️  Controller concluído.');
+    return retorno;
   }
 }
