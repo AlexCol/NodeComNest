@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, HttpException } from '@nestjs/common';
 import { ExemplosService } from './exemplos.service';
 import { IsNumberPipe } from 'src/common/pipes/is-number.pipe';
-import { UserParam } from 'src/param/user-param.decorator';
-import { ReqDataParam } from 'src/param/req-data-param.decorator';
+import { UserParam } from 'src/common/param/user-param.decorator';
+import { ReqDataParam } from 'src/common/param/req-data-param.decorator';
 
 @Controller('exemplos')
 export class ExemplosController {
