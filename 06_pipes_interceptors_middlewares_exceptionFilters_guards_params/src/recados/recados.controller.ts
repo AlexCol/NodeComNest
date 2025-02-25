@@ -27,6 +27,8 @@ import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interce
 import { FastifyRequest } from 'fastify';
 import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
 import { IsPublic } from 'src/common/guards/is-public';
+import { UrlParam } from 'src/common/params/url-param.decorator';
+import { ReqDataParam } from 'src/common/params/req-data.param.decorator';
 
 @Controller('recados')
 // @UsePipes(new ParseIntPipe( //exemplo de uso de pipe em um controller (pode ter options ou não), pode quebrar rotas que não tenham parametros numericos (como findAll)
@@ -44,8 +46,13 @@ export class RecadosController {
   //@UseGuards(new IsAdminGuard('admin')) //exemplo de uso de guarda em um controller
   @IsPublic()
   async findAll(
-    @Query() paginationDto: PaginationDto
+    @Query() paginationDto: PaginationDto,
+    //@UrlParam() url: string
+    @ReqDataParam('url') url: string,
+    @ReqDataParam('method') method: string
   ) {
+    console.log('Url:', url);
+    console.log('Method:', method);
     return await this.recadosService.findAll(paginationDto);
   }
 

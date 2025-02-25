@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, HttpException } from '@nestjs/common';
 import { ExemplosService } from './exemplos.service';
 import { IsNumberPipe } from 'src/common/pipes/is-number.pipe';
+import { UserParam } from 'src/param/user-param.decorator';
+import { ReqDataParam } from 'src/param/req-data-param.decorator';
 
 @Controller('exemplos')
 export class ExemplosController {
@@ -24,9 +26,17 @@ export class ExemplosController {
 
   @Get('fluxo/:uuid')
   fluxo(
-    @Param('uuid') uuid: string
+    @Param('uuid') uuid: string,
+    @UserParam() user: any,
+    @ReqDataParam('url') url: string,
   ) {
     console.log('🔄 Controller chamado.');
+
+    if (user) {
+      console.log('🔑 Usuário recebido no controller', user);
+    }
+    console.log('🔗 URL recebida no controller', url);
+
     var random = Math.floor(Math.random() * 10) + 1;
     if (random <= 1)
       throw new Error(`Erro de 10% ao processar uuid: ${uuid}`);

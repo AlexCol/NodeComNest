@@ -29,5 +29,7 @@ GET {{baseUrl}}/uuid/550e8400-e29b-41d4-a716-446655440000
 ## Pipe valida se o Uuid é válido
 #### 5. Filters
 ## Erros são capturados pelo Filter
+#### 6. Params
+## Decorators para facilitar e evitar repetições. Ex. Não precisar pegar o usuário explicitamente em cada controler que precisa dele.
 GET {{baseUrl}}/fluxo/550e8400-e29b-41d4-a716-446655440000?senha=123
 Authorization: Bearer admin
