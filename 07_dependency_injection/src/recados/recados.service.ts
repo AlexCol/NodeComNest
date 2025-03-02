@@ -33,7 +33,7 @@ export class RecadosService {
     const take = limit;
     const skip = (page - 1) * limit;
 
-    console.log(`Usando utils no service, invertendo 'Ale': ${this.utils.interteString('Ale')}`);
+    console.log(`Usando utils no service, invertendo 'Ale': ${this.utils.inverteString('Ale')}`);
 
     if (limit === 0)
       return await this.recadoRepository.find({ ...this.findBaseOptions });

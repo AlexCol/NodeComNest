@@ -16,7 +16,7 @@ export class RecadosController {
   async findAll(
     @Query() paginationDto: PaginationDto
   ) {
-    console.log(`Usando utils no controller, invertendo 'Best': ${this.utils.interteString('Best')}`);
+    console.log(`Usando utils no controller recados, invertendo 'Best': ${this.utils.inverteString('Best')}`);
     return await this.recadosService.findAll(paginationDto);
   }
 

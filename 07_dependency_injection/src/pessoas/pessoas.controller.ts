@@ -2,10 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
+import { Utils } from 'src/common/util/ExemploDI.teste';
 
 @Controller('pessoas')
 export class PessoasController {
-  constructor(private readonly pessoasService: PessoasService) { }
+  constructor(
+    private readonly pessoasService: PessoasService,
+    private readonly utils: Utils
+  ) { }
 
   @Post()
   async create(@Body() createPessoaDto: CreatePessoaDto) {
@@ -17,6 +21,7 @@ export class PessoasController {
     @Query() query: any
   ) {
     const { page, limit } = query;
+    console.log(`Usando utils no controller pessoas, invertendo 'Best': ${this.utils.inverteString('Best')}`);
     return this.pessoasService.findAll(page, limit);
   }
 
