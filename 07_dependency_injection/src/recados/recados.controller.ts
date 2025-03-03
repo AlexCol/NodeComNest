@@ -1,21 +1,37 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { Utils } from 'src/common/util/ExemploDI.teste';
+import { SERVER_NAME } from 'src/common/constants/server-name.constant';
+import { RegexProtocol } from 'src/common/regex/regex.protocol';
 
 @Controller('recados')
 export class RecadosController {
   constructor(
     private readonly recadosService: RecadosService,
-    private readonly utils: Utils
 
+    private readonly utils: Utils,
+
+    @Inject(SERVER_NAME)
+    private readonly serverName: string,
+
+    //private readonly regexProtocol: RegexProtocol
+
+    @Inject('ONLY_LOWERCASE_LETTERS_REGEX')
+    private readonly onlyLowercaseLettersRegex: RegexProtocol,
+
+    @Inject('REMOVE_SPACES_REGEX')
+    private readonly removeSpacesRegex: RegexProtocol
   ) { }
   @Get()
   async findAll(
     @Query() paginationDto: PaginationDto
   ) {
+    console.log(`OnlyLowerCaseRegex: ${this.onlyLowercaseLettersRegex.execute('Teste Teste')}`);
+    console.log(`RemoveSpacesRegex: ${this.removeSpacesRegex.execute('Teste Teste')}`);
+    console.log(`Server name: """${this.serverName}""". Importado via DI`);
     console.log(`Usando utils no controller recados, invertendo 'Best': ${this.utils.inverteString('Best')}`);
     return await this.recadosService.findAll(paginationDto);
   }
