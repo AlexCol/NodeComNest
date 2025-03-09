@@ -1,0 +1,64 @@
+@baseUrl = http://localhost:3000
+
+### Get Recados / All
+GET {{baseUrl}}/recados
+?page=3
+&limit=2
+
+### Get Recados / One byId
+GET {{baseUrl}}/recados/1
+
+### Post Recados
+POST {{baseUrl}}/recados
+Content-Type: application/json
+
+{
+  "texto": "Recado Teste",
+  "deId": 2,
+  "paraId": 3
+}
+
+### Put Recados / One byId
+PUT {{baseUrl}}/recados/68
+Content-Type: application/json
+
+{
+  "texto": "Recado atualizado Post10",
+  "lido": true,
+  //"deId": 2,
+  //"paraId": 3
+}
+
+### Delete Recados / One byId
+DELETE {{baseUrl}}/recados/2
+
+#########################
+### Pessoas
+### Get Pessoas / All
+GET {{baseUrl}}/pessoas
+?page=1
+&limit=1
+
+### Get Pessoas / One byId
+GET {{baseUrl}}/pessoas/16
+
+### Post Pessoas
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com.br",
+  "nome": "Maria",
+  "password": "Ab1@234"
+}
+
+### Patch Pessoas / One byId
+PATCH {{baseUrl}}/pessoas/50
+Content-Type: application/json
+
+{
+  "password": "234@Ab1"
+}
+
+### Delete Pessoas / One byId
+DELETE {{baseUrl}}/pessoas/1
