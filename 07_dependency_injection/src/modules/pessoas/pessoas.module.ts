@@ -3,7 +3,7 @@ import { PessoasService } from './pessoas.service';
 import { PessoasController } from './pessoas.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pessoa } from './entities/pessoa.entity';
-import { RecadosModule } from 'src/recados/recados.module';
+import { RecadosModule } from 'src/modules/recados/recados.module';
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { RecadosController } from './recados.controller';
-import { PessoasModule } from 'src/pessoas/pessoas.module';
+import { PessoasModule } from 'src/modules/pessoas/pessoas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Recado } from './entities/recado.entity';
 import { Utils, UtilsMock } from 'src/common/util/ExemploDI.teste';

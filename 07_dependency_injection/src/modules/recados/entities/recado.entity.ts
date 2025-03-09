@@ -1,4 +1,4 @@
-import { Pessoa } from "src/pessoas/entities/pessoa.entity";
+import { Pessoa } from "src/modules/pessoas/entities/pessoa.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity() //se não passar nada, o nome da tabela será o nome da classe

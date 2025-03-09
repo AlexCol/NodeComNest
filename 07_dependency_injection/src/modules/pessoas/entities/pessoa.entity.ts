@@ -1,5 +1,5 @@
 import { IsEmail } from "class-validator";
-import { Recado } from "src/recados/entities/recado.entity";
+import { Recado } from "src/modules/recados/entities/recado.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()

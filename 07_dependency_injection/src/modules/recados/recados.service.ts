@@ -4,7 +4,7 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { FindManyOptions, In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PessoasService } from 'src/pessoas/pessoas.service';
+import { PessoasService } from 'src/modules/pessoas/pessoas.service';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { Utils } from 'src/common/util/ExemploDI.teste';
 
