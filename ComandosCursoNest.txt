@@ -70,3 +70,6 @@ ajustar na main de:
 const app = await NestFactory.create(AppModule);
 para
 const app = await NestFactory.create(AppModule, new FastifyAdapter());
+
+/*usar .env -- configurado no modulo raiz (pasta 08_) com exemplo de uso no appModule e recadosModule*/
+npm i @nestjs/config
