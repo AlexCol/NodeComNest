@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+
+### Get app
+GET {{baseUrl}}
+
+### Get app/env
+GET {{baseUrl}}/env

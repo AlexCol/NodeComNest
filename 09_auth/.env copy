@@ -1,0 +1,9 @@
+MEU_ENV = "Este é o valor da variável de ambiente MEU_ENV"
+DB_TYPE = postgres
+DB_USER = root
+DB_PASS = nest@852ad
+DB_HOST = 127.0.0.1
+DB_PORT = 5432
+DB_DATABASE = nest
+DB_AUTO_LOAD_ENTITIES = true
+DB_SYNCHRONIZE = true
