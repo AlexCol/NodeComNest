@@ -66,6 +66,15 @@ Por:
 const app = await NestFactory.create(AppModule, new FastifyAdapter());
 ```
 
+Adicionar:
+```ts
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, //elimina do json de entrada valores que não estão no DTO
+    forbidNonWhitelisted: true, //emite erro se houver valores não permitidos
+    transform: true, //como 'true' tenta transformar os tipos das variáveis de entrada para os tipos definidos no DTO
+  }));
+```
+
 ### Adicionar `.env` no `app.module.ts` (Nos Imports)
 ```ts
 ConfigModule.forRoot()
@@ -83,7 +92,27 @@ DB_AUTO_LOAD_ENTITIES = true
 DB_SYNCHRONIZE = true
 ```
 
-Adicionar um arquivo `src/DataBase/ConfigTypeOrm.ts` (pode ser qualquer nome), para carregas as configurações.
+Adicionar um arquivo `src/database/configTypeOrm.ts` (pode ser qualquer nome), para carregas as configurações.
+```ts
+import { Injectable } from "@nestjs/common";
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
+
+@Injectable()
+export class ConfigTypeOrm implements TypeOrmOptionsFactory {
+  createTypeOrmOptions(): TypeOrmModuleOptions {
+    return {
+      type: process.env.DB_TYPE as any,
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT as any,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_DATABASE,
+      autoLoadEntities: Boolean(process.env.DB_AUTO_LOAD_ENTITIES), // carrega automaticamente as entidades
+      synchronize: Boolean(process.env.DB_SYNCHRONIZE), // sincroniza o banco de dados com as entidades (não usar em produção)
+    };
+  }
+}
+```
 
 Em `app.module.ts`, adicionar a configuração usando `TypeOrmModule.forRootAsync`:
 ```ts
@@ -93,3 +122,5 @@ Em `app.module.ts`, adicionar a configuração usando `TypeOrmModule.forRootAsyn
       useClass: ConfigTypeOrm,
     }),
 ```
+
+Para ver se dá certo, ao subir o servidor não devem ocorrer erros. `(para testar, pode-se mudar um dos parametros no .env)`
