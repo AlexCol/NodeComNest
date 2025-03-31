@@ -8,3 +8,92 @@ GET {{baseUrl}}/env
 
 ### Get keyNumber
 GET {{baseUrl}}/param-number/123
+
+### Get Recados / All
+GET {{baseUrl}}/recados
+?page=1
+&limit=10
+
+### Get Recados / One byId
+GET {{baseUrl}}/recados/1
+
+### Post Recados
+POST {{baseUrl}}/recados
+Content-Type: application/json
+
+{
+  "texto": "Recado Teste",
+  "deId": 51,
+  "paraId": 50
+}
+
+### Put Recados / One byId
+PUT {{baseUrl}}/recados/68
+Content-Type: application/json
+
+{
+  "texto": "Recado atualizado Post10",
+  "lido": true,
+  //"deId": 2,
+  //"paraId": 3
+}
+
+### Delete Recados / One byId
+DELETE {{baseUrl}}/recados/2
+
+#########################
+### Pessoas
+### Get Pessoas / All
+GET {{baseUrl}}/pessoas
+?page=1
+&limit=10
+
+### Get Pessoas / One byId
+GET {{baseUrl}}/pessoas/16
+
+### Post Pessoas
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com.br",
+  "nome": "Maria",
+  "password": "Ab1@234"
+}
+
+### Patch Pessoas / One byId
+PATCH {{baseUrl}}/pessoas/50
+Content-Type: application/json
+
+{
+  "password": "234@Ab1"
+}
+
+### Delete Pessoas / One byId
+DELETE {{baseUrl}}/pessoas/1
+
+### Create Color
+POST {{baseUrl}}/colors
+Content-Type: application/json
+
+{
+  "colorName": "Blue",
+  "colorHex": "#0000FF",
+  "colorRgb": "0,0,255"
+}
+
+### Get Colors / All
+GET {{baseUrl}}/colors
+
+### Get Colors / One byId
+GET {{baseUrl}}/colors/2
+
+### Put Colors / One byId
+PATCH  {{baseUrl}}/colors/2
+Content-Type: application/json
+
+{
+  "colorName": "Green",
+  "colorHex": "#00FF00",
+  "colorRgb": "0,255,0"
+}

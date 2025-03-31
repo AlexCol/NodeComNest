@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigTypeOrm } from 'src/Database/ConfigTypeOrm';
+import { RecadosModule } from './recados/recados.module';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { ColorsModule } from './colors/colors.module';
 
 @Module({
   imports: [
@@ -13,8 +14,9 @@ import { ConfigTypeOrm } from 'src/Database/ConfigTypeOrm';
       // Usa a classe ConfigTypeOrm para fornecer as configurações
       useClass: ConfigTypeOrm,
     }),
+    RecadosModule,
+    PessoasModule,
+    ColorsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule { }
