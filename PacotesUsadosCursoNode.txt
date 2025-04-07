@@ -13,7 +13,7 @@ npm install chalk@4.1.2
 npm install --save-dev @types/chalk
 
 //versão 9 não funciona com typescript por algum motivo --mesmo problema do chalk
-npm install inquirer@8.2.6 
+npm install inquirer@8.2.6
 npm install --save-dev @types/inquirer
 
 //express
@@ -40,8 +40,8 @@ npm install sequelize
 npm install --save-dev @types/sequelize
 
 //bcryptjs (criptografar senhas)
-npm install bcryptjs
-npm install --save-dev @types/bcryptjs
+npm install bcryptjs (ou 'bcrypt' que é mais rapido)
+npm install --save-dev @types/bcryptjs (ou 'bcrypt' que é mais rapido)
 
 //connect-flash
 //cookie-parser
@@ -54,12 +54,12 @@ npm install --save-dev @types/.
 
 //mongo db
 /*criar comando para instalar mongodb no node*/
-npm install mongodb 
+npm install mongodb
 npm install --save-dev @types/mongodb
 
 //mongoose
 /*criar comando para instalar mongodb no node*/
-npm install mongoose 
+npm install mongoose
 npm install --save-dev @types/mongoose
 
 //zod para validação de dados

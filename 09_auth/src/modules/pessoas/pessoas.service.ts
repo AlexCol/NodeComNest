@@ -1,14 +1,17 @@
-import { ConflictException, HttpException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, HttpException, Injectable } from '@nestjs/common';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pessoa } from './entities/pessoa.entity';
 import { QueryFailedError, Repository } from 'typeorm';
+import { IHashingService } from 'src/auth/hashing/hashing.service';
 
 @Injectable()
 export class PessoasService {
   constructor(
-    @InjectRepository(Pessoa) private pessoaRepository: Repository<Pessoa>
+    @InjectRepository(Pessoa)
+    private pessoaRepository: Repository<Pessoa>,
+    private readonly hashService: IHashingService,
   ) { }
 
   async create(createPessoaDto: CreatePessoaDto) {
@@ -18,10 +21,12 @@ export class PessoasService {
         throw new ConflictException('Endereço de e-mail informado já cadastrado - finded');
       }
 
+      const passwordHash = await this.hashService.hashPassword(createPessoaDto.password);
+
       const pessoaData = {
         email: createPessoaDto.email,
         nome: createPessoaDto.nome,
-        passwordHash: createPessoaDto.password,
+        passwordHash: passwordHash,
       }
 
       const novaPessoa = this.pessoaRepository.create(pessoaData);
@@ -63,7 +68,12 @@ export class PessoasService {
 
   async update(id: number, updatePessoaDto: UpdatePessoaDto) {
     await this.findOne(id); //só pra validar se a pessoa existe
-    const partialDto = { nome: updatePessoaDto.nome, passwordHash: updatePessoaDto.password }
+
+    let passwordHash = updatePessoaDto.password;
+    if (passwordHash)
+      passwordHash = await this.hashService.hashPassword(updatePessoaDto.password);
+
+    const partialDto = { nome: updatePessoaDto.nome, passwordHash };
     await this.pessoaRepository.update(id, partialDto);
     return await this.findOne(id);
   }

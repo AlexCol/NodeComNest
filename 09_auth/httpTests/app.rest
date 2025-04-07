@@ -49,29 +49,30 @@ GET {{baseUrl}}/pessoas
 &limit=10
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/16
+GET {{baseUrl}}/pessoas/52
 
 ### Post Pessoas
 POST {{baseUrl}}/pessoas
 Content-Type: application/json
 
 {
-  "email": "teste@teste.com.br",
-  "nome": "Maria",
+  "email": "teste@teste2.com.br",
+  "nome": "Bernard",
   "password": "Ab1@234"
 }
 
 ### Patch Pessoas / One byId
-PATCH {{baseUrl}}/pessoas/50
+PATCH {{baseUrl}}/pessoas/53
 Content-Type: application/json
 
 {
-  "password": "234@Ab1"
+  "password": "Ab1@234"
 }
 
 ### Delete Pessoas / One byId
 DELETE {{baseUrl}}/pessoas/1
 
+######################### colors
 ### Create Color
 POST {{baseUrl}}/colors
 Content-Type: application/json

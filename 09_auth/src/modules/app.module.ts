@@ -5,6 +5,7 @@ import { ConfigTypeOrm } from 'src/Database/ConfigTypeOrm';
 import { RecadosModule } from './recados/recados.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { ColorsModule } from './colors/colors.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ColorsModule } from './colors/colors.module';
     RecadosModule,
     PessoasModule,
     ColorsModule,
+    AuthModule, //por ser global, não precisa ser importado em nenhum outro módulo
   ],
 })
 export class AppModule { }
