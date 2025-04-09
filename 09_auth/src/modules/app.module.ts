@@ -6,6 +6,8 @@ import { RecadosModule } from './recados/recados.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { ColorsModule } from './colors/colors.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { APP_FILTER } from '@nestjs/core';
+import { NotFoundFilter } from 'src/common/excpetionFilters/notFoundFilter.filter';
 
 @Module({
   imports: [
@@ -20,5 +22,8 @@ import { AuthModule } from 'src/auth/auth.module';
     ColorsModule,
     AuthModule, //por ser global, não precisa ser importado em nenhum outro módulo
   ],
+  providers: [
+    { provide: APP_FILTER, useClass: NotFoundFilter },
+  ]
 })
 export class AppModule { }
