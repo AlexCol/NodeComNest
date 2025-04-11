@@ -5,11 +5,14 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pessoa } from 'src/modules/pessoas/entities/pessoa.entity';
+import { ConfigModule } from '@nestjs/config';
+import jwtConfig from './config/jwt.config';
 
 @Global() // This module is global, so it can be imported in any other module without needing to be imported again.
 @Module({
   imports: [
     TypeOrmModule.forFeature([Pessoa]), // Importing the TypeOrm module for the Pessoa entity
+    ConfigModule.forFeature(jwtConfig), // Importing the ConfigModule for JWT configuration
   ],
   controllers: [
     AuthController
