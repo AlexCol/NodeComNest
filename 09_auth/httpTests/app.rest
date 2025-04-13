@@ -1,6 +1,8 @@
 @baseUrl = http://localhost:3000
+@authToken = {{authenticate.response.body.accessToken}}
 
 ###login
+# @name authenticate
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -13,7 +15,7 @@ Content-Type: application/json
 GET {{baseUrl}}/recados
 ?page=1
 &limit=10
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywib3V0cmFQcm9wcmllZGFkZSI6Im91dHJhUHJvcHJpZWRhZGUiLCJpYXQiOjE3NDQ1NTUxMzQsImV4cCI6MTc0NDU1ODczNCwiYXVkIjoiZXhhbXBsZS5jb20iLCJpc3MiOiJodHRwczovL2V4YW1wbGUuY29tIn0.RyQah53dEOxV6L_24nisHKlNpRG-2nEiGmskp3uYO1U
+Authorization: Bearer {{authToken}}
 
 ### Get Recados / One byId
 GET {{baseUrl}}/recados/1
