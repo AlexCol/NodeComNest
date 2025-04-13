@@ -4,7 +4,7 @@ import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pessoa } from './entities/pessoa.entity';
 import { QueryFailedError, Repository } from 'typeorm';
-import { IHashingService } from 'src/auth/hashing/hashing.service';
+import { IHashingService } from 'src/modules/auth/hashing/hashing.service';
 
 @Injectable()
 export class PessoasService {

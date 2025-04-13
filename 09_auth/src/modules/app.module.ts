@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigTypeOrm } from 'src/Database/ConfigTypeOrm';
+import { ConfigTypeOrm } from 'src/database/ConfigTypeOrm';
 import { RecadosModule } from './recados/recados.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { ColorsModule } from './colors/colors.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { NotFoundFilter } from 'src/common/excpetionFilters/notFoundFilter.filter';
 

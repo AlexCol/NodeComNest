@@ -7,15 +7,19 @@ import { IHashingService } from "./hashing/hashing.service";
 import { NotFoundError } from "rxjs";
 import jwtConfig from "./config/jwt.config";
 import { ConfigType } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
+import { IsPublic } from "./guards/is-public";
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Pessoa) private readonly pessoaRepository: Repository<Pessoa>, // Injecting the Pessoa repository to interact with the database
+    //
+    @Inject(jwtConfig.KEY) private readonly jwtConfiguration: ConfigType<typeof jwtConfig>, // Injecting the JWT configuration
+    //
     private readonly hashingService: IHashingService, // Injecting the hashing service for password hashing
-
-    @Inject(jwtConfig.KEY)
-    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>, // Injecting the JWT configuration
+    //
+    private readonly jwtService: JwtService, // Injecting the JWT service for generating and verifying JWTs
   ) {
     console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
   }
@@ -27,8 +31,24 @@ export class AuthService {
     const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, pessoa.passwordHash); // Check if the password is valid
     if (!isPasswordValid) this.authThrowGenericError();
 
+    console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
+
+    const accessToken = await this.jwtService.signAsync(
+      { //"claims/payload"
+        id: pessoa.id,
+        outraPropriedade: "outraPropriedade",
+      },
+      {
+        audience: this.jwtConfiguration.audience,
+        issuer: this.jwtConfiguration.issuer,
+        expiresIn: this.jwtConfiguration.expiresIn,
+        secret: this.jwtConfiguration.secret,
+      }
+    );
+
     return {
       message: "Login successful",
+      accessToken
     };
   }
 

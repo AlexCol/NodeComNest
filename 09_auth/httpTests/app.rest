@@ -9,19 +9,11 @@ Content-Type: application/json
   "password": "Ab1@234"
 }
 
-### Get app
-GET {{baseUrl}}
-
-### Get app/env
-GET {{baseUrl}}/env
-
-### Get keyNumber
-GET {{baseUrl}}/param-number/123
-
 ### Get Recados / All
 GET {{baseUrl}}/recados
 ?page=1
 &limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywib3V0cmFQcm9wcmllZGFkZSI6Im91dHJhUHJvcHJpZWRhZGUiLCJpYXQiOjE3NDQ1NTUxMzQsImV4cCI6MTc0NDU1ODczNCwiYXVkIjoiZXhhbXBsZS5jb20iLCJpc3MiOiJodHRwczovL2V4YW1wbGUuY29tIn0.RyQah53dEOxV6L_24nisHKlNpRG-2nEiGmskp3uYO1U
 
 ### Get Recados / One byId
 GET {{baseUrl}}/recados/1
@@ -42,7 +34,7 @@ Content-Type: application/json
 
 {
   "texto": "Recado atualizado Post10",
-  "lido": true,
+  "lido": true
   //"deId": 2,
   //"paraId": 3
 }
@@ -65,13 +57,13 @@ POST {{baseUrl}}/pessoas
 Content-Type: application/json
 
 {
-  "email": "teste@teste2.com.br",
-  "nome": "Bernard",
+  "email": "teste@teste.com.br",
+  "nome": "Alexandre",
   "password": "Ab1@234"
 }
 
 ### Patch Pessoas / One byId
-PATCH {{baseUrl}}/pessoas/53
+PATCH {{baseUrl}}/pessoas/3
 Content-Type: application/json
 
 {

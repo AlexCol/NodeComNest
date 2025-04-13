@@ -73,3 +73,7 @@ const app = await NestFactory.create(AppModule, new FastifyAdapter());
 
 /*usar .env -- configurado no modulo raiz (pasta 08_) com exemplo de uso no appModule e recadosModule*/
 npm i @nestjs/config
+
+//instalar modulo jwt
+npm i @nestjs/jwt
+--importado e usado no authModule
