@@ -9,44 +9,11 @@ Content-Type: application/json
 {
   //"email": "teste@teste.com.br",
   "email": "teste@teste2.com.br",
+  //"email": "teste@teste.com",
   "password": "Ab1@234"
 }
 
-### Get Recados / All
-GET {{baseUrl}}/recados
-?page=1
-&limit=10
-Authorization: Bearer {{authToken}}
-
-### Get Recados / One byId
-GET {{baseUrl}}/recados/1
-
-### Post Recados
-POST {{baseUrl}}/recados
-Content-Type: application/json
-
-{
-  "texto": "Recado Teste",
-  "deId": 51,
-  "paraId": 50
-}
-
-### Put Recados / One byId
-PUT {{baseUrl}}/recados/68
-Content-Type: application/json
-
-{
-  "texto": "Recado atualizado Post10",
-  "lido": true
-  //"deId": 2,
-  //"paraId": 3
-}
-
-### Delete Recados / One byId
-DELETE {{baseUrl}}/recados/2
-
-#########################
-### Pessoas
+################################################## Pessoas
 ### Get Pessoas / All
 GET {{baseUrl}}/pessoas
 ?page=1
@@ -54,10 +21,12 @@ GET {{baseUrl}}/pessoas
 Authorization: Bearer {{authToken}}
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/52
+GET {{baseUrl}}/pessoas/4
+Authorization: Bearer {{authToken}}
 
 ### Post Pessoas
 POST {{baseUrl}}/pessoas
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -72,32 +41,75 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "password": "Ab1@234"
+  "nome": "Bernard"
+  //"password": "Ab1@234"
 }
 
 ### Delete Pessoas / One byId
 DELETE {{baseUrl}}/pessoas/x
 Authorization: Bearer {{authToken}}
 
-######################### colors
-### Create Color
-POST {{baseUrl}}/colors
+################################################## recados
+
+### Get Recados / All
+GET {{baseUrl}}/recados
+?page=1
+&limit=10
+Authorization: Bearer {{authToken}}
+
+### Get by Id
+GET {{baseUrl}}/recados/25
+Authorization: Bearer {{authToken}}
+
+### Post Recados
+POST {{baseUrl}}/recados
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "colorName": "Blue",
-  "colorHex": "#0000FF",
-  "colorRgb": "0,0,255"
+  "texto": "Recado Teste",
+  "paraId": 4
+}
+
+### Put Recados / One byId
+PUT {{baseUrl}}/recados/27
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "texto": "Recado atualizado Post20",
+  "lido": true
+  //"deId": 2,
+  //"paraId": 3
+}
+
+### Delete Recados / One byId
+DELETE {{baseUrl}}/recados/24
+Authorization: Bearer {{authToken}}
+
+################################################## colors
+### Create Color
+POST {{baseUrl}}/colors
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "colorName": "Red",
+  "colorHex": "#FF0000",
+  "colorRgb": "255,0,0"
 }
 
 ### Get Colors / All
 GET {{baseUrl}}/colors
+Authorization: Bearer {{authToken}}
 
 ### Get Colors / One byId
 GET {{baseUrl}}/colors/2
+Authorization: Bearer {{authToken}}
 
 ### Put Colors / One byId
 PATCH  {{baseUrl}}/colors/2
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {

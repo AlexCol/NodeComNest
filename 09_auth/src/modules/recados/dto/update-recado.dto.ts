@@ -3,7 +3,7 @@ import { OmitType, PartialType } from "@nestjs/mapped-types";
 import { CreateRecadoDto } from "./create-recado.dto";
 
 export class UpdateRecadoDto extends PartialType(
-  OmitType(CreateRecadoDto, ['deId', 'paraId'] as const) //OmitType é um helper do NestJS que remove propriedades de um DTO
+  OmitType(CreateRecadoDto, ['paraId'] as const) //OmitType é um helper do NestJS que remove propriedades de um DTO
 ) {
   //PartialType é um helper do NestJS que transforma todas as propriedades de um DTO em opcionais
 

@@ -17,8 +17,8 @@ import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { FastifyRequest } from 'fastify';
-import { REQUEST_TOKEN_PAYLOAD_KEY } from '../auth/auth.constants';
-
+import { TokenPayloadParam } from '../auth/params/token-payload.param';
+import { TokenPayloadDto } from '../auth/dto/token-payload';
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) { }
@@ -26,51 +26,58 @@ export class RecadosController {
   async findAll(
     @Query('page') page: string = '1',
     @Query('limit') limit: string = '0',
-    @Req() request: FastifyRequest
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
   ) {
-    const payload = request[REQUEST_TOKEN_PAYLOAD_KEY];
-    if (payload) {
-      console.log(payload.id);
-      console.log(payload.outraPropriedade);
-      console.log(payload);
-    }
-    return await this.recadosService.findAll(parseInt(page), parseInt(limit));
+    const { id: userId } = tokenPayload;
+    return await this.recadosService.findAll(userId, parseInt(page), parseInt(limit));
   }
 
   @Get(':id')
   async findOne(
-    @Param('id') id: number
+    @Param('id') id: number,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
   ) {
-    return await this.recadosService.findById(id);
+    const { id: userId } = tokenPayload;
+    return await this.recadosService.findById(userId, id);
   }
 
   @Post()
-  async create(@Body() body: CreateRecadoDto) {
-    return await this.recadosService.create(body);
+  async create(
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+    @Body() body: CreateRecadoDto
+  ) {
+    const { id: userId } = tokenPayload;
+    return await this.recadosService.create(userId, body);
   }
 
   @Put(':id')
   async updatePut(
     @Param('id') id: number,
-    @Body() body: UpdateRecadoDto
+    @Body() body: UpdateRecadoDto,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
   ) {
-    return await this.recadosService.update(id, body);
+    const { id: userId } = tokenPayload;
+    return await this.recadosService.update(userId, id, body);
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: number,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
     @Body() body: UpdateRecadoDto
   ) {
-    var retorno = await this.recadosService.update(id, body);
+    const { id: userId } = tokenPayload;
+    var retorno = await this.recadosService.update(userId, id, body);
     return retorno;
   }
 
   @Delete(':id')
   async remove(
-    @Param('id') id: number
+    @Param('id') id: number,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
   ) {
-    const recado = await this.recadosService.remove(id);
+    const { id: userId } = tokenPayload;
+    const recado = await this.recadosService.remove(userId, id);
     return { message: `Recado ${id} removido com sucesso`, ...recado };
   }
 }

@@ -31,7 +31,7 @@ export class AuthService {
     const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, pessoa.passwordHash); // Check if the password is valid
     if (!isPasswordValid) this.authThrowGenericError();
 
-    console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
+    //console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
 
     const accessToken = await this.jwtService.signAsync(
       { //"claims/payload"

@@ -9,9 +9,9 @@ export class CreateRecadoDto {
   //! e o decorator que usa essa classe para validar (que por sua vez pode ser usado no DTO)
   readonly texto: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  readonly deId: number;
+  // @IsNumber()
+  // @IsNotEmpty()
+  // readonly deId: number; //será alimentado pelo id do token
 
   @IsNumber()
   @IsNotEmpty()

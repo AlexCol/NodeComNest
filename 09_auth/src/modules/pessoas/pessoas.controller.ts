@@ -4,11 +4,13 @@ import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { TokenPayloadParam } from '../auth/params/token-payload.param';
 import { TokenPayloadDto } from '../auth/dto/token-payload';
+import { IsPublic } from '../auth/guards/is-public';
 
 @Controller('pessoas')
 export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) { }
 
+  @IsPublic()
   @Post()
   async create(@Body() createPessoaDto: CreatePessoaDto) {
     return this.pessoasService.create(createPessoaDto);
