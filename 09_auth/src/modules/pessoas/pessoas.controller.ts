@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common';
 import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
+import { TokenPayloadParam } from '../auth/params/token-payload.param';
+import { TokenPayloadDto } from '../auth/dto/token-payload';
 
 @Controller('pessoas')
 export class PessoasController {
@@ -26,12 +28,24 @@ export class PessoasController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
+  async update(
+    @Param('id') id: number,
+    @Body() updatePessoaDto: UpdatePessoaDto,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+  ) {
+    if (tokenPayload.id !== +id)
+      throw new BadRequestException('Você não tem permissão para atualizar essa pessoa');
     return this.pessoasService.update(+id, updatePessoaDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(
+    @Param('id') id: number,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+  ) {
+    if (tokenPayload.id !== id)
+      throw new BadRequestException('Você não tem permissão para excluir essa pessoa');
+
     const pessoaDeletada = await this.pessoasService.remove(id);
     return { message: `Pessoa com id ${id} deletada com sucesso`, pessoa: pessoaDeletada };
   }
