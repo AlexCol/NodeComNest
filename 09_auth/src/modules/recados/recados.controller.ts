@@ -18,7 +18,7 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { FastifyRequest } from 'fastify';
 import { TokenPayloadParam } from '../auth/params/token-payload.param';
-import { TokenPayloadDto } from '../auth/dto/token-payload';
+import { TokenPayloadDto } from '../auth/dto/token-payload.dto';
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) { }

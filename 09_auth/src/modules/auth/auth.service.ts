@@ -9,6 +9,7 @@ import jwtConfig from "./config/jwt.config";
 import { ConfigType } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { IsPublic } from "./guards/is-public";
+import { RefreshTokenDto } from "./dto/refresh-token.dto";
 
 @Injectable()
 export class AuthService {
@@ -31,25 +32,54 @@ export class AuthService {
     const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, pessoa.passwordHash); // Check if the password is valid
     if (!isPasswordValid) this.authThrowGenericError();
 
-    //console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
+    const tokens = await this.createTokens(pessoa); // Create JWT tokens for the user
 
-    const accessToken = await this.jwtService.signAsync(
-      { //"claims/payload"
-        id: pessoa.id,
-        outraPropriedade: "outraPropriedade",
+    return {
+      message: "Login successful",
+      ...tokens,
+    };
+  }
+
+  async refreshTokens(refreshTokenDto: RefreshTokenDto) {
+    try {
+      const { id } = await this.jwtService.verifyAsync(refreshTokenDto.refreshToken, this.jwtConfiguration); // Verify the refresh token and extract the user ID
+      const pessoa = await this.pessoaRepository.findOne({ where: { id } }); // Find the user by ID
+      if (!pessoa) {
+        throw new NotFoundException('User not found'); // Throw a NotFoundException if the user is not found
+      }
+      const tokens = await this.createTokens(pessoa); // Create new JWT tokens for the user
+      return {
+        message: "Refresh token successful",
+        ...tokens,
+      };
+    } catch (error) {
+      throw new UnauthorizedException('Invalid refresh token'); // Throw an Unauthorized exception if the refresh token is invalid
+    }
+  }
+
+  private async createTokens(pessoa: Pessoa) {
+    const payload = { id: pessoa.id, email: pessoa.email, outraPropriedade: "outraPropriedade" }; // Create a payload with the user's ID and email
+    const accessToken = await this.signJwtAsync(pessoa.id, this.jwtConfiguration.expiresIn, payload);
+    const refreshToken = await this.signJwtAsync(pessoa.id, this.jwtConfiguration.jwtRefreshExpires);
+    return {
+      accessToken,
+      refreshToken
+    }
+  }
+
+  private async signJwtAsync<T>(id: number, expiresIn: number, payload?: T): Promise<string> {
+    return await this.jwtService.signAsync(
+      {
+        id,
+        ...payload
       },
       {
         audience: this.jwtConfiguration.audience,
         issuer: this.jwtConfiguration.issuer,
-        expiresIn: this.jwtConfiguration.expiresIn,
+        expiresIn: expiresIn,
         secret: this.jwtConfiguration.secret,
       }
     );
-
-    return {
-      message: "Login successful",
-      accessToken
-    };
   }
 
   private authThrowGenericError() {

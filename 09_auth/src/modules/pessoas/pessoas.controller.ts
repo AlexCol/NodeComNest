@@ -3,7 +3,7 @@ import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { TokenPayloadParam } from '../auth/params/token-payload.param';
-import { TokenPayloadDto } from '../auth/dto/token-payload';
+import { TokenPayloadDto } from '../auth/dto/token-payload.dto';
 import { IsPublic } from '../auth/guards/is-public';
 
 @Controller('pessoas')
