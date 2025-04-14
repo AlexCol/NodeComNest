@@ -9,8 +9,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  //"email": "teste@teste.com.br",
-  "email": "teste@teste2.com.br",
+  "email": "teste@teste.com.br",
+  //"email": "teste@teste2.com.br",
   //"email": "teste@teste.com",
   "password": "Ab1@234"
 }
@@ -52,8 +52,21 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "nome": "Bernard"
+  "nome": "Bernard",
   //"password": "Ab1@234"
+  "ativo": false
+}
+
+### Put Pessoas / One byId - Com Role de Admin
+PUT {{baseUrl}}/pessoas/4
+Authorization: Bearer {{authToken}}
+Role: user
+Content-Type: application/json
+
+{
+  "nome": "Bernard",
+  //"password": "Ab1@234"
+  "ativo": false
 }
 
 ### Delete Pessoas / One byId

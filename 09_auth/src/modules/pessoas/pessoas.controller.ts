@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException, Put } from '@nestjs/common';
 import { PessoasService } from './pessoas.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { TokenPayloadParam } from '../auth/params/token-payload.param';
 import { TokenPayloadDto } from '../auth/dto/token-payload.dto';
 import { IsPublic } from '../auth/guards/is-public';
+import { ERole, RolePolicy } from '../auth/guards/role-policy';
 
 @Controller('pessoas')
 export class PessoasController {
@@ -40,6 +41,14 @@ export class PessoasController {
     return this.pessoasService.update(+id, updatePessoaDto);
   }
 
+  @RolePolicy(ERole.admin)
+  @Put(':id')
+  async updateForAdmin(
+    @Param('id') id: number,
+    @Body() updatePessoaDto: UpdatePessoaDto
+  ) {
+    return this.pessoasService.update(+id, updatePessoaDto);
+  }
   @Delete(':id')
   async remove(
     @Param('id') id: number,

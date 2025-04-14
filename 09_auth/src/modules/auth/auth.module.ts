@@ -10,6 +10,8 @@ import jwtConfig from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthTokenGuard } from './guards/auth-token.guard';
+import { RolePolicy } from './guards/role-policy';
+import { RolePolicyGuard } from './guards/role-policy.guard';
 
 @Global() // This module is global, so it can be imported in any other module without needing to be imported again.
 @Module({
@@ -25,6 +27,7 @@ import { AuthTokenGuard } from './guards/auth-token.guard';
     AuthService,
     { provide: IHashingService, useClass: BcryptService }, // Providing the IHashingService interface with the BcryptService implementation
     { provide: APP_GUARD, useClass: AuthTokenGuard }, // Registering the AuthTokenGuard as a global guard
+    { provide: APP_GUARD, useClass: RolePolicyGuard }, // Registering the RolePolicyGuard as a global guard
   ],
   exports: [
     IHashingService

@@ -5,10 +5,14 @@ import jwtConfig from "../config/jwt.config";
 import { ConfigType } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 import { REQUEST_TOKEN_PAYLOAD_KEY } from "../auth.constants";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Pessoa } from "src/modules/pessoas/entities/pessoa.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
   constructor(
+    @InjectRepository(Pessoa) private readonly pessoaRepository: Repository<Pessoa>, // Injetando o repositório de Pessoa para acessar os dados do banco
     private readonly jwtService: JwtService, // Injetando o serviço JWT para verificar o token
     @Inject(jwtConfig.KEY) private readonly jwtConfiguration: ConfigType<typeof jwtConfig>, // Injetando a configuração do JWT
     private reflector: Reflector, // Injetando o refletor para acessar metadados
@@ -23,14 +27,19 @@ export class AuthTokenGuard implements CanActivate {
       return true;
 
     if (!token)
-      throw new UnauthorizedException('Token não encontrado');
+      throw new Error('Token não encontrado');
 
     try {
       const payload = await this.jwtService.verifyAsync(token, this.jwtConfiguration);
+
+      const pessoa = await this.pessoaRepository.findOne({ where: { id: payload.id, ativo: true } }); // Verifica se a pessoa existe no banco de dados
+      if (!pessoa) {
+        throw new UnauthorizedException('Usuário não encontrado ou inativo'); // Se a pessoa não existir ou estiver inativa, lança uma exceção
+      }
+
       request[REQUEST_TOKEN_PAYLOAD_KEY] = payload; // Armazena o payload do token na requisição para uso posterior
     } catch (error) {
-      console.log(error.message);
-      throw new UnauthorizedException('Token inválido ou expirado');
+      throw new UnauthorizedException(`Token com problema. ${error.message}`);
     }
 
     return true; // Se o token for válido, retorna true para permitir o acesso

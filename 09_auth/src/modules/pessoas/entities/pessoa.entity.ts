@@ -30,4 +30,7 @@ export class Pessoa {
   //esses campos são preenchidos automaticamente pelo TypeORM e não são registrados no banco
   @OneToMany(() => Recado, recado => recado.para)
   recadosRecebidos: Recado[];
+
+  @Column({ default: true })
+  ativo: boolean;
 }

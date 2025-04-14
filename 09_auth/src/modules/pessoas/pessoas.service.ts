@@ -44,11 +44,11 @@ export class PessoasService {
   async findAll(page: number, limit: number = 0) {
     if (limit < 1) {
       return await this.pessoaRepository.find({
-        select: ['id', 'email', 'nome']
+        select: ['id', 'email', 'nome', 'ativo']
       });
     }
     return await this.pessoaRepository.find({
-      select: ['id', 'email', 'nome'],
+      select: ['id', 'email', 'nome', 'ativo'],
       take: limit,
       skip: (page - 1) * limit
     });
@@ -57,7 +57,7 @@ export class PessoasService {
 
   async findOne(id: number) {
     const pessoa = await this.pessoaRepository.findOne({
-      select: ['id', 'email', 'nome'],
+      select: ['id', 'email', 'nome', 'ativo'],
       where: { id }
     });
     if (!pessoa) {
@@ -73,7 +73,11 @@ export class PessoasService {
     if (passwordHash)
       passwordHash = await this.hashService.hashPassword(updatePessoaDto.password);
 
-    const partialDto = { nome: updatePessoaDto.nome, passwordHash };
+    const partialDto = {
+      nome: updatePessoaDto.nome,
+      passwordHash,
+      ativo: updatePessoaDto.ativo,
+    };
     await this.pessoaRepository.update(id, partialDto);
     return await this.findOne(id);
   }

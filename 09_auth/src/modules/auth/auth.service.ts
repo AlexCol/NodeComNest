@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto): Promise<{}> {
-    const pessoa = await this.pessoaRepository.findOne({ where: { email: loginDto.email } }); // Find the user by email
+    const pessoa = await this.pessoaRepository.findOne({ where: { email: loginDto.email, ativo: true } }); // Find the user by email
     if (!pessoa) this.authThrowGenericError();
 
     const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, pessoa.passwordHash); // Check if the password is valid
@@ -43,7 +43,7 @@ export class AuthService {
   async refreshTokens(refreshTokenDto: RefreshTokenDto) {
     try {
       const { id } = await this.jwtService.verifyAsync(refreshTokenDto.refreshToken, this.jwtConfiguration); // Verify the refresh token and extract the user ID
-      const pessoa = await this.pessoaRepository.findOne({ where: { id } }); // Find the user by ID
+      const pessoa = await this.pessoaRepository.findOne({ where: { id, ativo: true } }); // Find the user by ID
       if (!pessoa) {
         throw new NotFoundException('User not found'); // Throw a NotFoundException if the user is not found
       }
