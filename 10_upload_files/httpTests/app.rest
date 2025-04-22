@@ -6,6 +6,9 @@
 ### Get Files
 GET {{baseUrl}}/files
 
+### Get File by GUUID (FILE NAME)
+GET {{baseUrl}}/files/7c0c7d27-d945-4368-a0b8-9a792cc1ba55
+
 ############################################################################################################
 ###Post File and return data
 POST {{baseUrl}}/files/data

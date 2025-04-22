@@ -16,3 +16,4 @@ export class ConfigTypeOrm implements TypeOrmOptionsFactory {
     };
   }
 }
+

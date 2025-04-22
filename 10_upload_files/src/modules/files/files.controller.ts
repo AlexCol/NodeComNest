@@ -1,19 +1,20 @@
-import { Controller, Get, Post, UseInterceptors, UploadedFile, Res, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, UseInterceptors, UploadedFile, Res, UploadedFiles, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Param } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import * as path from 'path';
 import * as fs from 'fs/promises';
+import { FileSizeValidationPipe } from './pipes/FileSizeValidation.pipe';
 
 @Controller('files')
 export class FilesController {
   constructor() { }
-
+  ////////////////////////////////////////////////////////////////////////////////////?
   @Get()
   findAll() {
     return 'This action returns all files';
   }
-
-  @Post('data')
+  ////////////////////////////////////////////////////////////////////////////////////?
+  @Post('data') //!https://docs.nestjs.com/techniques/file-upload
   @UseInterceptors(FileInterceptor('file')) // Intercepta o arquivo enviado no campo 'file'
   async Upload(
     @UploadedFile() file: Express.Multer.File
@@ -39,11 +40,35 @@ export class FilesController {
       size: file.size, // Tamanho do arquivo
     }
   }
-
-  @Post('image')
+  ////////////////////////////////////////////////////////////////////////////////////?
+  @Get(':imageName') //!https://docs.nestjs.com/techniques/file-upload
+  async getImage(
+    @Param('imageName') imageName: string, // Recebe o nome da imagem como parâmetro
+    @Res() res: Response
+  ) {
+    const filePath = path.resolve(
+      process.cwd(),
+      'uploads',
+      `${imageName}.jpg`); // Caminho completo do arquivo
+    const file = await fs.readFile(filePath); // Lê o arquivo do sistema de arquivos
+    res.set({
+      'Content-Type': 'image/jpeg', // Define o tipo MIME da resposta
+      'Content-Disposition': `inline; filename="${imageName}.jpg"` // Define o nome do arquivo na resposta
+    });
+    return res.send(file); // Retorna o arquivo como resposta
+  }
+  ////////////////////////////////////////////////////////////////////////////////////?
+  @Post('image') //!https://docs.nestjs.com/techniques/file-upload
   @UseInterceptors(FileInterceptor('file')) // Intercepta o arquivo enviado no campo 'file'
   Upload2(
-    @UploadedFile() file: Express.Multer.File, // Recebe o arquivo enviado
+    @UploadedFile(
+      //new FileSizeValidationPipe() //! forma 1 de validação, usando pipe customizado
+      new ParseFilePipe({ //! forma 2 de validação, usando pipe padrão do nestjs
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 5000 }), // Tamanho máximo do arquivo em bytes
+        ],
+      })
+    ) file: Express.Multer.File, // Recebe o arquivo enviado
     @Res() res: Response,
   ) {
     res.set({
@@ -52,11 +77,13 @@ export class FilesController {
     });
     return res.send(file.buffer)
   }
-
-  @Post('images')
+  ////////////////////////////////////////////////////////////////////////////////////?
+  @Post('images') //!https://docs.nestjs.com/techniques/file-upload
   @UseInterceptors(FilesInterceptor('file')) // Intercepta o arquivo enviado no campo 'file'
   async Uploads(
-    @UploadedFiles() files: Array<Express.Multer.File>, // Recebe o arquivo enviado
+    @UploadedFiles(
+      //new FileSizeValidationPipe() //! usando apenas a customizada, no endpoint acima tem o uso dos dois
+    ) files: Array<Express.Multer.File>, // Recebe o arquivo enviado
     @Res() res: Response,
   ) {
     files.forEach(async (file) => {
