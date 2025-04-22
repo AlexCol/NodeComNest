@@ -77,3 +77,7 @@ npm i @nestjs/config
 //instalar modulo jwt
 npm i @nestjs/jwt
 --importado e usado no authModule
+
+//instalar multer (precisa ser com express)
+npm i --save-dev @types/multer
+

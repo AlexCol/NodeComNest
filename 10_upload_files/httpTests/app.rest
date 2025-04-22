@@ -1,0 +1,48 @@
+@baseUrl = http://localhost:3000
+@filePath = /Users/username/Downloads/test.txt
+
+@filename = cammy.jpg
+
+### Get Files
+GET {{baseUrl}}/files
+
+############################################################################################################
+###Post File and return data
+POST {{baseUrl}}/files/data
+Content-Type: multipart/form-data; boundary=----BoundaryDelimitadorHttp
+
+------BoundaryDelimitadorHttp
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: image/jpeg
+
+< D:\meusRepos\{{filename}}
+------BoundaryDelimitadorHttp--
+
+############################################################################################################
+###Post File and return image
+POST {{baseUrl}}/files/image
+Content-Type: multipart/form-data; boundary=----BoundaryDelimitadorHttp
+
+------BoundaryDelimitadorHttp
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: image/jpeg
+
+< D:\meusRepos\{{filename}}
+------BoundaryDelimitadorHttp--
+
+############################################################################################################
+###Post File and return image
+POST {{baseUrl}}/files/images
+Content-Type: multipart/form-data; boundary=----BoundaryDelimitadorHttp
+
+------BoundaryDelimitadorHttp
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: image/jpeg
+
+< D:\meusRepos\{{filename}}
+------BoundaryDelimitadorHttp
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: image/jpeg
+
+< D:\meusRepos\{{filename}}
+------BoundaryDelimitadorHttp--
