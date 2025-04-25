@@ -1,25 +1,43 @@
+import { Repository } from "typeorm";
+import { PessoasService } from "./pessoas.service";
+import { Pessoa } from "./entities/pessoa.entity";
+import { Test, TestingModule } from "@nestjs/testing";
+import { getRepositoryToken } from "@nestjs/typeorm";
+import { IHashingService } from "../auth/hashing/hashing.service";
+
 describe("PessoasService", () => {
-  beforeAll(() => {
-    //console.log("Isso será executado uma vez antes de todos os testes dentro do describe");
+  let pessoaService: PessoasService;
+  let pessoaRepository: Repository<Pessoa>;
+  let hashingService: IHashingService;
+
+  //beforeAll
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        PessoasService,
+        {
+          provide: getRepositoryToken(Pessoa),
+          useValue: {}
+        },
+        {
+          provide: IHashingService,
+          useValue: {}
+        }
+      ],
+    }).compile();
+
+    pessoaService = module.get<PessoasService>(PessoasService);
+    pessoaRepository = module.get<Repository<Pessoa>>(getRepositoryToken(Pessoa));
+    hashingService = module.get<IHashingService>(IHashingService);
   });
 
-  beforeEach(() => {
-    //console.log("Isso será executado antes de cada teste dentro do describe");
+  it("pessoaService should be defined", () => {
+    expect(pessoaService).toBeDefined();
   });
 
-  it("should be defined1", () => {
-    expect(true).toBe(true);
-  });
+  describe("create", () => {
+    it("should create a new 'pessoa'", async () => {
 
-  test("should be defined2", () => {
-    expect(true).toBe(true);
-  });
-});
-
-describe("PessoasService2", () => {
-  //fora do escopo do outro describe, não terá acesso a variáveis definidas no outro describe
-  //também não irá disparar o beforeAll do outro describe
-  it("should be defined3", () => {
-    expect(true).toBe(true);
+    });
   });
 });
