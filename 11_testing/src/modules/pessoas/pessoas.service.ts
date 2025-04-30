@@ -68,7 +68,7 @@ export class PessoasService {
    * - Suporta paginação com `page` e `limit`.
    * - Se `limit` for zero, retorna todos os registros.
    */
-  async findAll(page: number, limit: number = 0) {
+  async findAll(page: number = 1, limit: number = 0) {
     if (limit < 1) {
       return await this.pessoaRepository.find({
         select: ['id', 'email', 'nome', 'ativo'],
