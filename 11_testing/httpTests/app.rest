@@ -35,7 +35,7 @@ GET {{baseUrl}}/pessoas
 Authorization: Bearer {{authToken}}
 
 ### Get Pessoas / One byId
-GET {{baseUrl}}/pessoas/4
+GET {{baseUrl}}/pessoas/5
 Authorization: Bearer {{authToken}}
 
 ### Post Pessoas
