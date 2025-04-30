@@ -8,6 +8,7 @@ import { ColorsModule } from './colors/colors.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { NotFoundFilter } from 'src/common/excpetionFilters/notFoundFilter.filter';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { NotFoundFilter } from 'src/common/excpetionFilters/notFoundFilter.filte
   ],
   providers: [
     { provide: APP_FILTER, useClass: NotFoundFilter },
-  ]
+  ],
+  controllers: [AppController]
 })
 export class AppModule { }

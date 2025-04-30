@@ -22,7 +22,7 @@ export class AuthService {
     //
     private readonly jwtService: JwtService, // Injecting the JWT service for generating and verifying JWTs
   ) {
-    console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
+    //console.log(this.jwtConfiguration); // Logging the JWT secret for debugging purposes
   }
 
   async login(loginDto: LoginDto): Promise<{}> {

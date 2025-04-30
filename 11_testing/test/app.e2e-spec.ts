@@ -16,6 +16,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
+  afterEach(async () => { //! por padrão o Nest não cria isso. Mas sem isso fica dando warning nos testes 'de demora de encerramento'
+    await app.close();
+  });
+
   it('/ (GET)', () => {
     return request(app.getHttpServer())
       .get('/')
