@@ -81,3 +81,8 @@ npm i @nestjs/jwt
 //instalar multer (precisa ser com express)
 npm i --save-dev @types/multer
 
+//instalar o helmet
+npm i helmet
+
+// throttler - pra controlar Rate Limiting //https://docs.nestjs.com/security/rate-limiting
+npm i --save @nestjs/throttler
