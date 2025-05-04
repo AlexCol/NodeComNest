@@ -1,0 +1,143 @@
+@baseUrl = http://localhost:3000
+@authToken = {{authenticate.response.body.accessToken}}
+@refreshToken = {{authenticate.response.body.refreshToken}}
+
+################################################## Autenticação
+### Login
+# @name authenticate
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com.br",
+  //"email": "teste@teste2.com.br",
+  //"email": "teste@teste.com",
+  "password": "Ab1@234"
+}
+
+### Refresh Token
+# @name authenticate
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+################################################## Pessoas
+### Get Pessoas / All
+GET {{baseUrl}}/pessoas
+?page=1
+&limit=10
+Authorization: Bearer {{authToken}}
+
+### Get Pessoas / One byId
+GET {{baseUrl}}/pessoas/4
+Authorization: Bearer {{authToken}}
+
+### Post Pessoas
+POST {{baseUrl}}/pessoas
+//Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "email": "eu_axil@yahoo.com.br",
+  "nome": "Alexandre",
+  "password": "Ab1@234"
+}
+
+### Patch Pessoas / One byId
+PATCH {{baseUrl}}/pessoas/4
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "nome": "Bernard",
+  //"password": "Ab1@234"
+  "ativo": false
+}
+
+### Put Pessoas / One byId - Com Role de Admin
+PUT {{baseUrl}}/pessoas/4
+Authorization: Bearer {{authToken}}
+Role: user
+Content-Type: application/json
+
+{
+  "nome": "Bernard",
+  //"password": "Ab1@234"
+  "ativo": false
+}
+
+### Delete Pessoas / One byId
+DELETE {{baseUrl}}/pessoas/x
+Authorization: Bearer {{authToken}}
+
+################################################## recados
+
+### Get Recados / All
+GET {{baseUrl}}/recados
+?page=1
+&limit=10
+Authorization: Bearer {{authToken}}
+
+### Get by Id
+GET {{baseUrl}}/recados/25
+Authorization: Bearer {{authToken}}
+
+### Post Recados
+POST {{baseUrl}}/recados
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "texto": "Recado Teste",
+  "paraId": 6
+}
+
+### Put Recados / One byId
+PUT {{baseUrl}}/recados/27
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "texto": "Recado atualizado Post20",
+  "lido": true
+  //"deId": 2,
+  //"paraId": 3
+}
+
+### Delete Recados / One byId
+DELETE {{baseUrl}}/recados/24
+Authorization: Bearer {{authToken}}
+
+################################################## colors
+### Create Color
+POST {{baseUrl}}/colors
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "colorName": "Red",
+  "colorHex": "#FF0000",
+  "colorRgb": "255,0,0"
+}
+
+### Get Colors / All
+GET {{baseUrl}}/colors
+Authorization: Bearer {{authToken}}
+
+### Get Colors / One byId
+GET {{baseUrl}}/colors/2
+Authorization: Bearer {{authToken}}
+
+### Put Colors / One byId
+PATCH  {{baseUrl}}/colors/2
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "colorName": "Green",
+  "colorHex": "#00FF00",
+  "colorRgb": "0,255,0"
+}

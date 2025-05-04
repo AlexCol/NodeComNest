@@ -1,0 +1,15 @@
+MEU_ENV = "Este é o valor da variável de ambiente MEU_ENV"
+DB_TYPE = postgres
+DB_USER = root
+DB_PASS = nest@852ad
+DB_HOST = 127.0.0.1
+DB_PORT = 5432
+DB_DATABASE = nest
+DB_AUTO_LOAD_ENTITIES = true
+DB_SYNCHRONIZE = true
+
+JWT_TOKEN_SECRET = pr1v4t3-53cr3t-K3y-pr1v4t3-53cr3t-K3y-pr1v4t3-53cr3t-K3y
+JWT_TOKEN_AUDIENCE = example.com
+JWT_TOKEN_ISSUER = https://example.com
+JWT_TOKEN_EXPIRATION = 3600
+JWT_REFRESH_EXPIRATION = 86400

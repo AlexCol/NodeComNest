@@ -86,3 +86,7 @@ npm i helmet
 
 // throttler - pra controlar Rate Limiting //https://docs.nestjs.com/security/rate-limiting
 npm i --save @nestjs/throttler
+
+// nodemailer - para email
+npm i nodemailer
+npm i --save-dev @types/nodemailer
