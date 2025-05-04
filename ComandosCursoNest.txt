@@ -87,6 +87,12 @@ npm i helmet
 // throttler - pra controlar Rate Limiting //https://docs.nestjs.com/security/rate-limiting
 npm i --save @nestjs/throttler
 
-// nodemailer - para email
+// nodemailer - para email (feito no projeto de email, criado o modulo, e consumido na criação de recados)
 npm i nodemailer
 npm i --save-dev @types/nodemailer
+
+// swagger (main.ts na 14_swagger)
+npm i @nestjs/swagger
+npm i swagger-ui-express
+obs: se quiser usar com Fastify, precisa tbm instalar: npm install --save @fastify/static
+obs: para ler os dtos, adicionar em nest-cli.json a parte de plugins
